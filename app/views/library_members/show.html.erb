@@ -1,4 +1,4 @@
-<h1>List of ax library members</h1>
+<h1>List of a library members</h1>
 
 <table>
   <tr>
@@ -10,4 +10,28 @@
     <td><%= @library_member.email %></td>
     <td><%= @library_member.name %></td>
   </tr>
+</table>
+
+<h1>Checkout history</h1>
+
+<table>
+  <tr>
+    <td>ISBN</td>
+    <td>Title</td>
+    <td>Author</td>
+    <td>Checked Out</td>
+    <td>Checkout Date</td>
+    <td>Return Date</td>
+  </tr>
+
+  <% @library_member.histories.each do |history| %>
+      <tr>
+        <td><%= history.book.isbn %></td>
+        <td><%= history.book.title %></td>
+        <td><%= history.book.author %></td>
+        <td><%= history.book.checked_out? %></td>
+        <td><%= history.checkout %></td>
+        <td><%= history.return %></td>
+      </tr>
+  <% end %>
 </table>
