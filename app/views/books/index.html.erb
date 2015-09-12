@@ -6,6 +6,7 @@
     <td>Title</td>
     <td>Description</td>
     <td>Author</td>
+    <td>Checked Out</td>
   </tr>
 
   <% @books.each do |book| %>
@@ -13,6 +14,7 @@
         <td><%= book.isbn %></td>
         <td><%= book.title %></td>
         <td><%= book.description %></td>
+        <td><%= book.author %></td>
         <td><%= book.checked_out?  %></td>
       </tr>
   <% end %>
