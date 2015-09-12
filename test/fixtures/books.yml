@@ -1,15 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  isbn: MyString
+  id: 1
+  isbn: ISBN1
   title: MyString
   description: MyString
   author: MyString
-  status: false
 
 two:
-  isbn: MyString
+  id: 2
+  isbn: ISBN2
   title: MyString
   description: MyString
   author: MyString
-  status: false

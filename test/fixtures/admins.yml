@@ -1,11 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  email: MyString
+  id: 1
+  email: admin1@ncsu.edu
   name: MyString
   password: MyString
 
 two:
-  email: MyString
+  id: 2
+  email: admin2@ncsu.edu
   name: MyString
   password: MyString

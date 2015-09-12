@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  book_id: 1
+  library_member_id: 1
+  checkout: 2015-09-12 14:38:23
+  return: 2015-09-12 14:38:23
+
+two:
+  book_id: 1
+  library_member_id: 1
+  checkout: 2015-10-12 14:38:23
+
+three:
+  book_id: 2
+  library_member_id: 2
+  checkout: 2015-09-12 14:38:23
