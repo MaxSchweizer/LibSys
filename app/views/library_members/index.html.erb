@@ -1,0 +1,15 @@
+<h1>List of all library members</h1>
+
+<table>
+  <tr>
+    <td>Email</td>
+    <td>Name</td>
+  </tr>
+
+  <% @library_members.each do |library_member| %>
+      <tr>
+        <td><%= library_member.email %></td>
+        <td><%= library_member.name %></td>
+      </tr>
+  <% end %>
+</table>
