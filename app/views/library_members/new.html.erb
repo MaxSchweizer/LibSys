@@ -1,6 +1,22 @@
 <h1>New User</h1>
 
 <%= form_for :library_member, url: library_members_path do |f| %>
+
+    <!-- TODO: We should make the error messaging for the user better -->
+    <% if @library_member.errors.any? %>
+        <div id="error_explanation">
+          <h2>
+            <%= pluralize(@library_member.errors.count, "error") %> prohibited
+            this library member from being created:
+          </h2>
+          <ul>
+            <% @library_member.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
     <p>
       Email:<br>
       <%= f.text_field :email %>

@@ -4,4 +4,7 @@ class LibraryMember < ActiveRecord::Base
 
   attr_accessor :password_confirmation
   validates_confirmation_of :password
+
+  validates :name, :email, :password, presence: true
+  validates :email, uniqueness:  true
 end
