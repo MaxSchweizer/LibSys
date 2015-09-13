@@ -2,26 +2,16 @@
 <p>Find me in app/views/login/index.html.erb</p>
 
 
-<%= form_tag("/login", method: "get") do %>
-    <%= label_tag(:q, "User Name:") %>
+<%= form_tag do %>
+    <%= label_tag(:q, "User Name: ") %>
+    <br>
     <%= text_field_tag(:q) %>
-    <%= label_tag(:q, "Password:") %>
-    <%= text_field_tag(:q) %>
-    <%= submit_tag("Search") %>
+    <br>
+
+    <br><br>
+    <%= submit_tag("Login") %>
 <% end %>
 
-<%= form_for :login do |f| %>
-    <p>
-      <%= f.label("User Name") %><br>
-      <%= f.text_field :user_name %>
-    </p>
-
-    <p>
-      <%= f.label 'Password' %><br>
-      <%= f.text_area :password %>
-    </p>
-
-    <p>
-      <%= f.submit("Login")  %>
-    </p>
-<% end %>
+<br><br>
+<%= link_to 'Books', books_path %><br>
+<%= link_to 'Create New User', library_member_path(:new) %>
