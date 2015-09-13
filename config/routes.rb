@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  root 'login#index'
+
   resources :library_members
   resources :books
 
