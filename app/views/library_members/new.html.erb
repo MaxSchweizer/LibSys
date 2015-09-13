@@ -1,0 +1,27 @@
+<h1>New User</h1>
+
+<%= form_for :library_member, url: library_members_path do |f| %>
+    <p>
+      Email:<br>
+      <%= f.text_field :email %>
+    </p>
+
+    <p>
+      Name:<br>
+      <%= f.text_field :name %>
+    </p>
+
+    <p>
+      Password:<br>
+      <%= f.password_field :password %>
+    </p>
+
+    <p>
+      Repeat Password:<br>
+      <%= f.password_field :password_confirmation %>
+    </p>
+
+    <p>
+      <%= f.submit "Submit" %>
+    </p>
+<% end %>
