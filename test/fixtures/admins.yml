@@ -3,11 +3,11 @@
 one:
   id: 1
   email: admin1@ncsu.edu
-  name: MyString
-  password: MyString
+  name: Admin1
+  password: $2a$10$KtSFgGTzFZXtb2k80e/ST.BRtTNI0c76e2iJ5g.gic0GuJSy7skrO
 
 two:
   id: 2
   email: admin2@ncsu.edu
-  name: MyString
-  password: MyString
+  name: Admin2
+  password_digest: $2a$10$KtSFgGTzFZXtb2k80e/ST.BRtTNI0c76e2iJ5g.gic0GuJSy7skrO
