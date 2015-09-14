@@ -3,14 +3,9 @@ class Book < ActiveRecord::Base
   has_many :library_members, through: :histories
 
   validates :isbn, :title, :author, :description, presence: true
-  validates :isbn, uniqueness:  true
+  validates :isbn, uniqueness: true
 
   def checked_out?
-    histories.each do |history|
-      if history.return.nil?
-        return true
-      end
-    end
-    false
+    histories.where(return: [nil]).take.nil?
   end
 end
