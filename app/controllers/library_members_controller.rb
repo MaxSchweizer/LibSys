@@ -6,7 +6,7 @@ class LibraryMembersController < ApplicationController
   def show
     @library_member = LibraryMember.find params[:id]
   end
-
+  
   def new
     @library_member = LibraryMember.new
   end

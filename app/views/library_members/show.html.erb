@@ -29,9 +29,32 @@
         <td><%= history.book.isbn %></td>
         <td><%= history.book.title %></td>
         <td><%= history.book.author %></td>
-        <td><%= history.book.checked_out? %></td>
+        <td><%= history.checked_out? %></td>
         <td><%= history.checkout %></td>
         <td><%= history.return %></td>
       </tr>
+  <% end %>
+</table>
+
+<h1>Currently Checkout Books</h1>
+<table>
+  <tr>
+    <td>ISBN</td>
+    <td>Title</td>
+    <td>Author</td>
+    <td>Checkout Date</td>
+    <td></td>
+  </tr>
+
+  <% @library_member.histories.each do |history| %>
+      <% if history.return.nil? %>
+          <tr>
+            <td><%= history.book.isbn %></td>
+            <td><%= history.book.title %></td>
+            <td><%= history.book.author %></td>
+            <td><%= history.checkout %></td>
+            <td><%= button_to "Return Book", action: :update, controller: :histories, id: history.id %></td>
+          </tr>
+      <% end %>
   <% end %>
 </table>
