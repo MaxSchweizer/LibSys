@@ -4,12 +4,14 @@
   <tr>
     <td>Email</td>
     <td>Name</td>
+    <td></td>
   </tr>
 
   <% @library_members.each do |library_member| %>
       <tr>
         <td><%= library_member.email %></td>
         <td><%= library_member.name %></td>
+        <td><%= link_to "View Library Member Details", library_member_path(library_member.id) %></td>
       </tr>
   <% end %>
 </table>
