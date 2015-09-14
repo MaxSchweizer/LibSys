@@ -1,0 +1,43 @@
+<h1>Edit User</h1>
+
+<%= form_for :library_member, url: library_member_path(@library_member), method: :patch do |f| %>
+
+    <!-- TODO: We should make the error messaging for the user better -->
+    <% if @library_member.errors.any? %>
+        <div id="error_explanation">
+          <h2>
+            <%= pluralize(@library_member.errors.count, "error") %> prohibited
+            this library member from being created:
+          </h2>
+          <ul>
+            <% @library_member.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <p>
+      Email:<br>
+      <%= f.text_field :email %>
+    </p>
+
+    <p>
+      Name:<br>
+      <%= f.text_field :name %>
+    </p>
+
+    <p>
+      Password:<br>
+      <%= f.password_field :password %>
+    </p>
+
+    <p>
+      Repeat Password:<br>
+      <%= f.password_field :password_confirmation %>
+    </p>
+
+    <p>
+      <%= f.submit "Submit" %>
+    </p>
+<% end %>
