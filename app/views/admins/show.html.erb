@@ -1,0 +1,15 @@
+<h1>List of a admin</h1>
+
+<table>
+  <tr>
+    <td>Email</td>
+    <td>Name</td>
+  </tr>
+
+  <tr>
+    <td><%= @admin.email %></td>
+    <td><%= @admin.name %></td>
+  </tr>
+</table>
+
+<%= link_to "Edit Profile Details", action: :edit %>

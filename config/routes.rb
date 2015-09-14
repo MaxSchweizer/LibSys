@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  resources :library_members, :books
+  resources :library_members, :books, :admins
 
   root 'login#index'
 
