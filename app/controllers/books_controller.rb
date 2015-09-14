@@ -16,6 +16,14 @@ class BooksController < ApplicationController
     @book = Book.find params[:id]
   end
 
+  def destroy
+    @book = Book.find params[:id]
+    @book.destroy
+
+    # TODO: This may need to be a different redirect...
+    redirect_to book_path
+  end
+
   def create
     @book = Book.new message_params
 

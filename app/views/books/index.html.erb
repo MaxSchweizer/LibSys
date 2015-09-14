@@ -7,6 +7,7 @@
     <td>Description</td>
     <td>Author</td>
     <td>Checked Out</td>
+    <td></td>
   </tr>
 
   <% @books.each do |book| %>
@@ -15,7 +16,8 @@
         <td><%= book.title %></td>
         <td><%= book.description %></td>
         <td><%= book.author %></td>
-        <td><%= book.checked_out?  %></td>
+        <td><%= book.checked_out? %></td>
+        <td><%= link_to "Delete Book", book_path(book), method: :delete, data: {confirm: 'Are you sure?'} %></td>
       </tr>
   <% end %>
 </table>
