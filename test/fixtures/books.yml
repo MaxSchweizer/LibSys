@@ -1,15 +1,7 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  id: 1
-  isbn: ISBN1
-  title: MyString
-  description: MyString
-  author: MyString
-
-two:
-  id: 2
-  isbn: ISBN2
-  title: MyString
-  description: MyString
-  author: MyString
+<% 10.times do |n| %>
+book_<%= n %>:
+  isbn: <%= "ISBN#{n}" %>
+  title: <%= "Title#{n}" %>
+  description: <%= "Description#{n}" %>
+  author: <%= "Author#{n}" %>
+<% end %>

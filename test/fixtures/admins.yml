@@ -1,13 +1,7 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  id: 1
-  email: admin1@ncsu.edu
-  name: Admin1
-  password: $2a$10$KtSFgGTzFZXtb2k80e/ST.BRtTNI0c76e2iJ5g.gic0GuJSy7skrO
-
-two:
-  id: 2
-  email: admin2@ncsu.edu
-  name: Admin2
+<% 2.times do |n| %>
+admin_<%= n %>:
+  email: <%= "admin_#{n}@ncsu.edu" %>
+  name: <%= "name_#{n}" %>
+  # Hashed password of "1234" for easy testing
   password_digest: $2a$10$KtSFgGTzFZXtb2k80e/ST.BRtTNI0c76e2iJ5g.gic0GuJSy7skrO
+<% end %>

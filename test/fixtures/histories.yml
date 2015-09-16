@@ -1,17 +1,23 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# Setup book_0 has been checked out before and is currently out
+book_0_history_1:
+  book: book_0
+  library_member: library_member_0
+  checkout: 2014-09-12 14:38:23
+  return: 2014-09-12 14:38:23
 
-one:
-  book_id: 1
-  library_member_id: 1
-  checkout: 2015-09-12 14:38:23
-  return: 2015-09-12 14:38:23
+book_0_history_2:
+  book: book_0
+  library_member: library_member_2
+  checkout: 2015-08-12 14:38:23
+  return: 2015-10-12 14:38:22
 
-two:
-  book_id: 1
-  library_member_id: 1
+book_0_history_3:
+  book: book_0
+  library_member: library_member_0
   checkout: 2015-10-12 14:38:23
 
-three:
-  book_id: 2
-  library_member_id: 2
+# Setup book_1 that has only been checked out once and is currently out
+book_1_history_1:
+  book: book_2
+  library_member: library_member_2
   checkout: 2015-09-12 14:38:23
