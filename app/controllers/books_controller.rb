@@ -1,10 +1,14 @@
 class BooksController < ApplicationController
+  SEARCH_ACTIONS = ["isbn", "title", "author", "description"]
+
   def index
-    case params[:searchType]
-      when :author
-        @book = Book.find_by_author params[:id]
-      else
-        @books = Book.all
+    search_type, query = params["search_type"], params["query"]
+    if "status" == search_type then
+      @books = Book.all.find_all { |book| book.checked_out?.to_s == query }
+    elsif SEARCH_ACTIONS.include? search_type then
+      @books = Book.where "#{search_type} LIKE ?", "%#{query}%"
+    else
+      @books = Book.all
     end
   end
 
