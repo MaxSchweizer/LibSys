@@ -2,13 +2,19 @@
 <html>
 <head>
   <title>LibSys</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<%= yield %>
+<div class="top">
+  <h1>LibSys</h1>
+</div>
+
+<div class="content">
+  <%= yield %>
+</div>
 
 </body>
 </html>
