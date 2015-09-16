@@ -6,6 +6,7 @@ class Book < ActiveRecord::Base
   validates :isbn, uniqueness: true
 
   def checked_out?
+    return false if histories.take.nil?
     histories.where(return: [nil]).take.nil?
   end
 end
