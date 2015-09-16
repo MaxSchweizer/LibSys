@@ -36,23 +36,22 @@ class BookTest < ActiveSupport::TestCase
 
   # Test functions defined in Book class
   test "book should know it is checked out" do
-    # TODO: Figure out how to mock/stub a book connected to a history record
-    flunk "test not implemented yet"
-    book = Book.new
+    # Multi-checkout book
+    book = Book.find_by_isbn "ISBN0"
+    assert book.checked_out?
+
+    # Single checkout book
+    book = Book.find_by_isbn "ISBN1"
     assert book.checked_out?
   end
 
   test "book should know it is not checked out currently" do
-    # TODO: Figure out how to mock/stub a book connected to a history record
-    flunk "test not implemented yet"
-    book = Book.new
+    book = Book.find_by_isbn "ISBN2"
     assert_not book.checked_out?
   end
 
   test "book should know it hasn't been checked out yet" do
-    # TODO: Figure out how to mock/stub a book connected to a history record
-    flunk "test not implemented yet"
-    book = Book.new
+    book = Book.find_by_isbn "ISBN3"
     assert_not book.checked_out?
   end
 end
