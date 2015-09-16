@@ -34,6 +34,20 @@ class BookTest < ActiveSupport::TestCase
     assert_not book.save
   end
 
+  test "book can access its histories dependants" do
+    book = Book.find_by_isbn "ISBN0"
+    assert_equal 3, book.histories.length
+
+    book = Book.find_by_isbn "ISBN1"
+    assert_equal 1, book.histories.length
+
+    book = Book.find_by_isbn "ISBN2"
+    assert_equal 1, book.histories.length
+
+    book = Book.find_by_isbn "ISBN3"
+    assert_equal 0, book.histories.length
+  end
+
   # Test functions defined in Book class
   test "book should know it is checked out" do
     # Multi-checkout book
