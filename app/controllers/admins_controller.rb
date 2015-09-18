@@ -25,6 +25,13 @@ class AdminsController < ApplicationController
     @admin = Admin.new
   end
 
+  def destroy
+    @admin = Admin.find params[:id]
+    @admin.destroy
+
+    redirect_to admins_path
+  end
+
   def create
     @admin = Admin.new message_params
 
