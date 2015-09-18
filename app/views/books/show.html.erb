@@ -1,4 +1,4 @@
-<h1>List of a books</h1>
+<h1>Current Book</h1>
 
 <table>
   <tr>
@@ -7,6 +7,7 @@
     <td>Description</td>
     <td>Author</td>
     <td>Checked Out</td>
+    <td>Checked Out To</td>
   </tr>
 
 
@@ -16,5 +17,32 @@
     <td><%= @book.description %></td>
     <td><%= @book.author %></td>
     <td><%= @book.checked_out? %></td>
+    <td><%= (link_to "#{@book.checked_out_to?.email}", library_member_path(@book.checked_out_to?), action: :show) unless @book.checked_out_to?.nil? %></td>
   </tr>
 </table>
+
+<h1>Checkout history</h1>
+
+<table>
+  <tr>
+    <td>Email</td>
+    <td>Name</td>
+    <td>Checked Out</td>
+    <td>Checkout Date</td>
+    <td>Return Date</td>
+  </tr>
+
+  <% @book.histories.each do |history| %>
+      <tr>
+        <td><%= link_to "#{history.library_member.email}", library_member_path(history.library_member), action: :show %></td>
+        <td><%= history.library_member.name %></td>
+        <td><%= history.checked_out? %></td>
+        <td><%= history.checkout %></td>
+        <td><%= history.return %></td>
+      </tr>
+  <% end %>
+</table>
+
+
+<%= link_to "Edit Book Details", action: :edit %><br>
+<%= link_to "See All Books", action: :index %>

@@ -24,8 +24,7 @@ class BooksController < ApplicationController
     @book = Book.find params[:id]
     @book.destroy
 
-    # TODO: This may need to be a different redirect...
-    redirect_to book_path
+    redirect_to books_path
   end
 
   def create
@@ -40,7 +39,7 @@ class BooksController < ApplicationController
 
   private
   def message_params
-    params.require(:book).permit(:isbn, :title, :author, :description)
+    params.require(:book).permit(:isbn, :title, :author, :description, :status)
   end
 
 end

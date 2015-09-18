@@ -7,6 +7,15 @@ class Book < ActiveRecord::Base
 
   def checked_out?
     return false if histories.take.nil?
-    !histories.where(return: [nil]).take.nil?
+    !last_checked_out.nil?
+  end
+
+  def checked_out_to?
+    last_checked_out.library_member unless last_checked_out.nil?
+  end
+
+  private
+  def last_checked_out
+    histories.where(return: [nil]).take
   end
 end
