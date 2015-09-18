@@ -35,6 +35,7 @@ class LibraryMembersController < ApplicationController
     end
   end
 
+  private
   def message_params
     params.require(:library_member).permit(:email, :name, :password, :password_confirmation)
   end

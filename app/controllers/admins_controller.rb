@@ -35,6 +35,7 @@ class AdminsController < ApplicationController
     end
   end
 
+  private
   def message_params
     params.require(:admin).permit(:email, :name, :password, :password_confirmation)
   end

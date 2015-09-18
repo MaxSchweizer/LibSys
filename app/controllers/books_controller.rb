@@ -38,6 +38,7 @@ class BooksController < ApplicationController
     end
   end
 
+  private
   def message_params
     params.require(:book).permit(:isbn, :title, :author, :description)
   end
