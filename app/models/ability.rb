@@ -11,7 +11,8 @@ class Ability
     if user.type == "Admin"
       can :read, :all
     elsif user.type == "LibraryMember"
-      can :read, :all
+      can [:show, :update], LibraryMember
+      can [:read], Book
     end
   end
 end

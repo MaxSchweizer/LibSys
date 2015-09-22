@@ -9,7 +9,10 @@
 <body>
 
 <div class="top">
-  <h1>LibSys</h1>
+  <h1>LibSys</h1><br>
+  <% if logged_in? && current_user.type == 'LibraryMember' %>
+    TODO: Put a search bar for books up here...
+  <% end %>
 </div>
 
 <div class="content">

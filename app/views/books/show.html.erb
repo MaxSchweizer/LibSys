@@ -43,6 +43,8 @@
   <% end %>
 </table>
 
+<% if current_user.type == 'LibraryMember' %>
+    <%= link_to "Edit Book Details", action: :edit %><br>
+<% end %>
 
-<%= link_to "Edit Book Details", action: :edit %><br>
 <%= link_to "See All Books", action: :index %>
