@@ -15,3 +15,18 @@ admin_<%= n %>:
   password_digest: $2a$10$KtSFgGTzFZXtb2k80e/ST.BRtTNI0c76e2iJ5g.gic0GuJSy7skrO
   type: 'Admin'
 <% end %>
+
+# Create an admin that also has a library_member login
+both_admin:
+  email: <%= "both@ncsu.edu" %>
+  name: <%= "both" %>
+  # Hashed password of "1234" for easy testing
+  password_digest: $2a$10$KtSFgGTzFZXtb2k80e/ST.BRtTNI0c76e2iJ5g.gic0GuJSy7skrO
+  type: 'Admin'
+
+both_library_member:
+  email: <%= "both@ncsu.edu" %>
+  name: <%= "both" %>
+  # Hashed password of "1234" for easy testing
+  password_digest: $2a$10$KtSFgGTzFZXtb2k80e/ST.BRtTNI0c76e2iJ5g.gic0GuJSy7skrO
+  type: 'LibraryMember'

@@ -11,21 +11,14 @@ Login Admin User:<br>
     <%= f.label :password %>
     <%= f.password_field :password %><br>
 
-    <%= f.submit "Log in" %><br><br>
-<% end %>
-
-<!-- TODO: This needs to be fixed.  It tries to log the library_member in a an admin -->
-Login Library Member:<br>
-<%= form_for(:login, url: login_path) do |f| %>
-
-    <%= f.label :email %>
-    <%= f.email_field :email %><br>
-
-    <%= f.label :password %>
-    <%= f.password_field :password %><br>
+    <%= f.radio_button :type, 'Admin', :checked => true %>
+    <%= label :type_admin, 'Admin' %>
+    <%= f.radio_button :type, 'LibraryMember' %>
+    <%= label :type_library_member, 'Library Member' %>
 
     <%= f.submit "Log in" %><br><br>
 <% end %>
+
 
 If you do not have a library membership yet, click below to create a new library membership.<br>
 <%= link_to 'Create New Library Member', library_member_path(:new) %>
