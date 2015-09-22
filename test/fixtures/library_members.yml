@@ -1,7 +1,0 @@
-<% 3.times do |n| %>
-library_member_<%= n %>:
-  email: <%= "libary_member_#{n}@ncsu.edu" %>
-  name: <%= "name_#{n}" %>
-  # Hashed password of "1234" for easy testing
-  password_digest: $2a$10$KtSFgGTzFZXtb2k80e/ST.BRtTNI0c76e2iJ5g.gic0GuJSy7skrO
-<% end %>

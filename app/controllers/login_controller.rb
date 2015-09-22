@@ -4,10 +4,10 @@ class LoginController < ApplicationController
   end
 
   def create
-    admin = Admin.find_by(email: params[:login][:email])
-    if admin && admin.authenticate(params[:login][:password])
-      log_in admin
-      redirect_to admin
+    user = User.find_by(email: params[:login][:email])
+    if user && user.authenticate(params[:login][:password])
+      log_in user
+      redirect_to user
     else
       flash[:danger] = "Bad Admin Login"
       render :index
