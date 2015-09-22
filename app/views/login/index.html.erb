@@ -1,17 +1,31 @@
-<h1>Login#index</h1>
-<p>Find me in app/views/login/index.html.erb</p>
+<h1>Login Page</h1><br>
 
+Please fill out your credentials to login.<br>
 
-<%= form_tag do %>
-    <%= label_tag(:q, "User Name: ") %>
-    <br>
-    <%= text_field_tag(:q) %>
-    <br>
+Login Admin User:<br>
+<%= form_for(:login, url: login_path) do |f| %>
 
-    <br><br>
-    <%= submit_tag("Login") %>
+    <%= f.label :email %>
+    <%= f.email_field :email %><br>
+
+    <%= f.label :password %>
+    <%= f.password_field :password %><br>
+
+    <%= f.submit "Log in" %><br><br>
 <% end %>
 
-<br><br>
-<%= link_to 'Books', books_path %><br>
-<%= link_to 'Create New User', library_member_path(:new) %>
+<!-- TODO: This needs to be fixed.  It tries to log the library_member in a an admin -->
+Login Library Member:<br>
+<%= form_for(:login, url: login_path) do |f| %>
+
+    <%= f.label :email %>
+    <%= f.email_field :email %><br>
+
+    <%= f.label :password %>
+    <%= f.password_field :password %><br>
+
+    <%= f.submit "Log in" %><br><br>
+<% end %>
+
+If you do not have a library membership yet, click below to create a new library membership.<br>
+<%= link_to 'Create New Library Member', library_member_path(:new) %>

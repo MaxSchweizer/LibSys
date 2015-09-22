@@ -4,7 +4,10 @@ Rails.application.routes.draw do
 
   root 'login#index'
 
-  post '/', to: 'login#login'
+  get 'login' => 'login#index'
+  post 'login' => 'login#create'
+  delete 'logout' => 'login#destroy'
+
 
   post '/histories/:id/update' => 'histories#update'
 
