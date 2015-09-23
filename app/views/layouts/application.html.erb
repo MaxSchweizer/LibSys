@@ -10,8 +10,18 @@
 
 <div class="top">
   <h1>LibSys</h1><br>
-  <% if logged_in? && current_user.type == 'LibraryMember' %>
-    TODO: Put a search bar for books up here...
+  <% if logged_in? %>
+      <%= form_tag("/books", method: "get") do %>
+          <%= label_tag(:query, "Search for:") %>
+          <%= text_field_tag(:query) %>
+          <%= radio_button_tag(:search_type, "isbn", :checked => true) %>
+          <%= label_tag(:search_type_isbn, "isbn") %>
+          <% ["title", "author", "description", "status"].each do |item| %>
+              <%= radio_button_tag(:search_type, item) %>
+              <%= label_tag(:search_type_isbn, item) %>
+          <% end %>
+          <%= submit_tag("Search") %>
+      <% end %>
   <% end %>
 </div>
 
