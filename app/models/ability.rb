@@ -13,6 +13,8 @@ class Ability
     elsif user.library_member?
       can [:show, :update], LibraryMember
       can [:read], Book
+    else
+      can [:create], LibraryMember
     end
   end
 end
