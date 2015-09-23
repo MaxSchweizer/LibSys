@@ -8,9 +8,9 @@ class Ability
     # TODO: Put in the correct permissions here for who can see/do which actions of the controllers...
 
     user ||= User.new # guest user (not logged in)
-    if user.type == "Admin"
+    if user.admin?
       can :read, :all
-    elsif user.type == "LibraryMember"
+    elsif user.library_member?
       can [:show, :update], LibraryMember
       can [:read], Book
     end

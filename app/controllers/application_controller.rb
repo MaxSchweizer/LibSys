@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
   load_and_authorize_resource
 
   rescue_from CanCan::AccessDenied do |exception|
-    redirect_to :root, :alert => exception.message
+    log_out
+    redirect_to :root, :alert => exception.message + " You have been logged out."
   end
 end

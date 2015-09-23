@@ -7,7 +7,9 @@
     <td>Description</td>
     <td>Author</td>
     <td>Checked Out</td>
-    <td>Checked Out To</td>
+    <% if can? :view_others, @books %>
+        <td>Checked Out To</td>
+    <% end %>
   </tr>
 
 
@@ -17,7 +19,9 @@
     <td><%= @book.description %></td>
     <td><%= @book.author %></td>
     <td><%= @book.checked_out? %></td>
-    <td><%= (link_to "#{@book.checked_out_to?.email}", library_member_path(@book.checked_out_to?), action: :show) unless @book.checked_out_to?.nil? %></td>
+    <% if can? :view_others, @books %>
+        <td><%= (link_to "#{@book.checked_out_to?.email}", library_member_path(@book.checked_out_to?), action: :show) unless @book.checked_out_to?.nil? %></td>
+    <% end %>
   </tr>
 </table>
 
@@ -32,7 +36,8 @@
     <td>Return Date</td>
   </tr>
 
-  <% @book.histories.each do |history| %>
+  <% history = current_user.admin? ? @book.histories : @book.my_history(current_user)
+     history.each do |history| %>
       <tr>
         <td><%= link_to "#{history.library_member.email}", library_member_path(history.library_member), action: :show %></td>
         <td><%= history.library_member.name %></td>
@@ -43,7 +48,7 @@
   <% end %>
 </table>
 
-<% if current_user.type == 'LibraryMember' %>
+<% if can? :edit, @books %>
     <%= link_to "Edit Book Details", action: :edit %><br>
 <% end %>
 

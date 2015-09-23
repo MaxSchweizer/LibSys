@@ -8,7 +8,9 @@
     <td>Author</td>
     <td>Checked Out</td>
     <td></td>
-    <td></td>
+    <% if can? :destroy, @books %>
+        <td></td>
+    <% end %>
   </tr>
 
   <% @books.each do |book| %>
@@ -19,9 +21,13 @@
         <td><%= book.author %></td>
         <td><%= book.checked_out? %></td>
         <td><%= link_to "View Book's Detail", book_url(book) %></td>
-        <td><%= link_to "Delete Book", book_path(book), method: :delete, data: {confirm: 'Are you sure?'} %></td>
+        <% if can? :destroy, @books %>
+            <td><%= link_to "Delete Book", book_path(book), method: :delete, data: {confirm: 'Are you sure?'} %></td>
+        <% end %>
       </tr>
   <% end %>
 </table>
 
-<%= link_to "Create New Book", action: :new %>
+<% if can? :create, @books %>
+    <%= link_to "Create New Book", action: :new %>
+<% end %>
