@@ -29,7 +29,8 @@ class LibraryMembersController < ApplicationController
     @library_member = LibraryMember.new message_params
 
     if @library_member.save
-      redirect_to @library_member
+      flash[:message] = "Created new Library Member. Please login."
+      redirect_to @login
     else
       render :new
     end
