@@ -1,4 +1,4 @@
-<h1>Edit User</h1>
+<h1>Edit Admin Details</h1>
 
 <%= form_for :admin, url: admin_path(@admin), method: :patch do |f| %>
 
@@ -18,8 +18,7 @@
     <% end %>
 
     <p>
-      Email:<br>
-      <%= f.text_field :email %>
+      Email: <%= @admin.email %>
     </p>
 
     <p>
