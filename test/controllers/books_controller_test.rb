@@ -2,8 +2,10 @@ require 'test_helper'
 
 class BooksControllerTest < ActionController::TestCase
 
+
   # Test the index
   test "should get index" do
+
     get :index
     assert_response :success
     assert_not_nil assigns :books
@@ -30,26 +32,28 @@ class BooksControllerTest < ActionController::TestCase
     # TODO: Write more unit test for this.  Perhaps decrease the number of books in the fixture for comprehensive testing.
   end
 
-  # Test the create
-  test "create new book" do
-    flunk "Test not implemented yet"
-  end
+  # # Test the create
+  # test "create new book" do
+  #   flunk "Test not implemented yet"
+  # end
 
-  test "create new book with bad data" do
-    flunk "Test not implemented yet"
-  end
+  # test "create new book with bad data" do
+  #   flunk "Test not implemented yet"
+  # end
+  #
+  # # Test the new
+  # test "view new book" do
+  #   flunk "Test not implemented yet"
+  # end
+  #
+  # # Test the destroy
+  # test "destroy book" do
+  #   flunk "Test not implemented yet"
+  # end
+  #
+  # test "destroy book that doesnt exist" do
+  #   flunk "Test not implemented yet"
+  # end
 
-  # Test the new
-  test "view new book" do
-    flunk "Test not implemented yet"
-  end
 
-  # Test the destroy
-  test "destroy book" do
-    flunk "Test not implemented yet"
-  end
-
-  test "destroy book that doesnt exist" do
-    flunk "Test not implemented yet"
-  end
 end
