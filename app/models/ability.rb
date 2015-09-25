@@ -10,7 +10,7 @@ class Ability
     user ||= User.new # guest user (not logged in)
     if user.admin?
       can :read, :all
-      can [:edit, :update, :create], Admin
+      can [:edit, :update, :create, :destroy], Admin
       can [:create], Book
     elsif user.library_member?
       can [:show, :update], LibraryMember

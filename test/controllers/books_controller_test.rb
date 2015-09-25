@@ -2,16 +2,18 @@ require 'test_helper'
 
 class BooksControllerTest < ActionController::TestCase
 
-  # Test the index
-  test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns :books
-
-    assert (assigns(:books).length >= 10)
-    # TODO: Write more unit test for this.  Perhaps decrease the number of books in the fixture for comprehensive testing.
+  # setup a LibraryMember in session so CanCan authenticates the actions
+  def setup
+    user = LibraryMember.create!(:name => "n", :email => "n@g.com", :password => "123")
+    session[:user_id] = user.id
+  end
+  # teardown session id so next test refreshes
+  def teardown
+    session[:user_id] = nil
+    user = nil
   end
 
+#===== test search features =============================================================================================================
   test "should be able to search by author with exact string" do
     get :index, {"search_type" => "author", "query" => "Author0"}
     assert_response :success
@@ -22,34 +24,117 @@ class BooksControllerTest < ActionController::TestCase
   end
 
   test "should be able to search by author with weak match string" do
-    get :index, {"search_type" => "author", "query" => "Author"}
+    get :index, {"search_type" => "author", "query" => "0"}
     assert_response :success
     assert_not_nil assigns :books
 
-    assert (assigns(:books).length >= 10)
+    assert (assigns(:books).length == 1), "Incorrect number of books returned. Check fixtures for details."
+  end
+
+  test "should be able to search by ISBN with weak match string" do
+    get :index, {"search_type" => "isbn", "query" => "0"}
+    assert_response :success
+    assert_not_nil assigns :books
+
+    assert (assigns(:books).length == 5), "Incorrect number of books returned. Check fixtures for details."
+  end
+
+  test "should be able to search by ISBN with exact match string" do
+    get :index, {"search_type" => "isbn", "query" => "0103"}
+    assert_response :success
+    assert_not_nil assigns :books
+
+    assert (assigns(:books).length <= 1), "Incorrect number of books returned. Check fixtures for details."
+    assert "Yellow Brick Road", assigns(:books)[0].title
+  end
+
+
+  test "should be able to search by title with weak match string" do
+    get :index, {"search_type" => "title", "query" => "yellow"}
+    assert_response :success
+    assert_not_nil assigns :books
+
+    assert (assigns(:books).length == 3), "Incorrect number of books returned. Check fixtures for details."
+  end
+
+  test "should be able to search by title with exact match string" do
+    get :index, {"search_type" => "title", "query" => "yellow brick road"}
+    assert_response :success
+    assert_not_nil assigns :books
+
+    assert (assigns(:books).length == 1), "Incorrect number of books returned. Check fixtures for details."
+    assert "OZ", assigns(:books)[0].author
+  end
+
+
+  test "should be able to search by description with weak match string" do
+    get :index, {"search_type" => "description", "query" => "yellow"}
+    assert_response :success
+    assert_not_nil assigns :books
+
+    assert (assigns(:books).length == 3), "Incorrect number of books returned. Check fixtures for details."
+  end
+
+  test "should be able to search by description with exact match string" do
+    get :index, {"search_type" => "description", "query" => "Follow the Yellow Brick Road!"}
+    assert_response :success
+    assert_not_nil assigns :books
+
+    assert (assigns(:books).length == 1), "Incorrect number of books returned. Check fixtures for details."
+    assert "OZ", assigns(:books)[0].author
+  end
+
+  test "should be able to search checked out = true " do
+    get :index, {"search_type" => "status", "query" => "true"}
+    assert_response :success
+    assert_not_nil assigns :books
+
+    assert (assigns(:books).length == 2), "Incorrect number of books returned. Check fixtures for details."
+  end
+
+  test "should be able to search checked out = false " do
+    get :index, {"search_type" => "status", "query" => "false"}
+    assert_response :success
+    assert_not_nil assigns :books
+
+    assert (assigns(:books).length == 12), "Incorrect number of books returned. Check fixtures for details."
+  end
+
+#=======test other methods ===============================================================================================
+  # Test the index
+  test "should get index" do
+    get :index
+    assert_response :success
+    assert_not_nil assigns :books
+
+    assert (assigns(:books).length == 14), "Incorrect number of books returned. Check fixtures for details."
     # TODO: Write more unit test for this.  Perhaps decrease the number of books in the fixture for comprehensive testing.
   end
 
-  # Test the create
+   # Test the create
   test "create new book" do
-    flunk "Test not implemented yet"
+    post :create, book: {isbn: "200", title: "200", author: "200", description: "200" } #, status: "false"}
+    #assert_response :success
+    assert_redirected_to book_path(assigns(@book))
   end
 
-  test "create new book with bad data" do
-    flunk "Test not implemented yet"
-  end
+  # test "create new book with bad data" do
+  #   flunk "Test not implemented yet"
+  # end
+  #
+  # # Test the new
+  # test "view new book" do
+  #   flunk "Test not implemented yet"
+  # end
+  #
+  # # Test the destroy
+  # test "destroy book" do
+  #   flunk "Test not implemented yet"
+  # end
+  #
+  # test "destroy book that doesnt exist" do
+  #   flunk "Test not implemented yet"
+  # end
 
-  # Test the new
-  test "view new book" do
-    flunk "Test not implemented yet"
-  end
 
-  # Test the destroy
-  test "destroy book" do
-    flunk "Test not implemented yet"
-  end
-
-  test "destroy book that doesnt exist" do
-    flunk "Test not implemented yet"
-  end
 end
