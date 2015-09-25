@@ -28,7 +28,7 @@ class BooksController < ApplicationController
   end
 
   def create
-    @book = Book.new message_params
+    @book = Book.new book_params
 
     if @book.save
       redirect_to @book
@@ -38,7 +38,7 @@ class BooksController < ApplicationController
   end
 
   private
-  def message_params
+  def book_params
     params.require(:book).permit(:isbn, :title, :author, :description, :status)
   end
 

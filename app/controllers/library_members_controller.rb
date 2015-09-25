@@ -14,7 +14,7 @@ class LibraryMembersController < ApplicationController
   def update
     @library_member = LibraryMember.find params[:id]
 
-    if @library_member.update message_params
+    if @library_member.update library_member_params
       redirect_to @library_member
     else
       render :edit
@@ -26,18 +26,18 @@ class LibraryMembersController < ApplicationController
   end
 
   def create
-    @library_member = LibraryMember.new message_params
+    @library_member = LibraryMember.new library_member_params
 
     if @library_member.save
       flash[:message] = "Created new Library Member. Please login."
-      redirect_to @login
+      redirect_to :login
     else
       render :new
     end
   end
 
   private
-  def message_params
+  def library_member_params
     params.require(:library_member).permit(:email, :name, :password, :password_confirmation)
   end
 end

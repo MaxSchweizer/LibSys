@@ -12,4 +12,10 @@ class ApplicationController < ActionController::Base
     log_out
     redirect_to :root, :alert => exception.message + " You have been logged out."
   end
+
+  before_filter do
+    resource = controller_name.singularize.to_sym
+    method = "#{resource}_params"
+    params[resource] &&= send(method) if respond_to?(method, true)
+  end
 end

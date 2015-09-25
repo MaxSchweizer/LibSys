@@ -14,7 +14,7 @@ class AdminsController < ApplicationController
   def update
     @admin = Admin.find params[:id]
 
-    if @admin.update message_params
+    if @admin.update admin_params
       redirect_to @admin
     else
       render :edit
@@ -33,7 +33,7 @@ class AdminsController < ApplicationController
   end
 
   def create
-    @admin = Admin.new message_params
+    @admin = Admin.new admin_params
 
     if @admin.save
       redirect_to @admin
@@ -43,7 +43,7 @@ class AdminsController < ApplicationController
   end
 
   private
-  def message_params
+  def admin_params
     params.require(:admin).permit(:email, :name, :password, :password_confirmation)
   end
 end
