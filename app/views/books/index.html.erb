@@ -28,6 +28,6 @@
   <% end %>
 </table>
 
-<% if can? :create, @books %>
+<% if can? :create, Book %>
     <%= link_to "Create New Book", action: :new %>
 <% end %>

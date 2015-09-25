@@ -13,6 +13,7 @@ class BooksController < ApplicationController
   end
 
   def new
+    library_members
     @book = Book.new
   end
 
@@ -31,9 +32,17 @@ class BooksController < ApplicationController
     @book = Book.new book_params
 
     if @book.save
+      save_book_history
       redirect_to @book
     else
-      render 'new'
+      render :new
+    end
+  end
+
+  def library_members
+    @book_list = []
+    LibraryMember.all.each do |library_member|
+      @book_list << [library_member.email, library_member.id]
     end
   end
 
@@ -42,4 +51,11 @@ class BooksController < ApplicationController
     params.require(:book).permit(:isbn, :title, :author, :description, :status)
   end
 
+  def save_book_history
+    library_member = LibraryMember.find params[:library_member]
+    render :new if library_member.nil?
+    if params[:status] == 'true'
+      render :new unless History.create(checkout: Time.now, book_id: @book.id, library_member_id: library_member.id)
+    end
+  end
 end
