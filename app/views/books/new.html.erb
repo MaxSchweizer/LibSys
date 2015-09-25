@@ -25,7 +25,9 @@
     <%= label_tag(:status_checked_out, "Checked Out") %><br>
 
     NOTE: If you are entering a 'Checked In' book then selecting a library member below will not do anything.<br>
-    <%= select_tag(:library_member, options_for_select(@book_list, @book_list.length)) %>
+
+    Book Status:
+    <%= select_tag(:library_member, options_for_select(@library_members, @library_members.length)) %>
     <%= label_tag(:library_member, "Checked Out To This Library Member") %><br>
 
     <%= submit_tag("Submit") %>

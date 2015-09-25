@@ -13,7 +13,7 @@ class BooksController < ApplicationController
   end
 
   def new
-    library_members
+    library_members_formatted
     @book = Book.new
   end
 
@@ -35,14 +35,19 @@ class BooksController < ApplicationController
       save_book_history
       redirect_to @book
     else
-      render :new
+      load_new
     end
   end
 
-  def library_members
-    @book_list = []
+  def load_new
+    library_members_formatted
+    render :new
+  end
+
+  def library_members_formatted
+    @library_members = []
     LibraryMember.all.each do |library_member|
-      @book_list << [library_member.email, library_member.id]
+      @library_members << [library_member.email, library_member.id]
     end
   end
 
@@ -53,9 +58,9 @@ class BooksController < ApplicationController
 
   def save_book_history
     library_member = LibraryMember.find params[:library_member]
-    render :new if library_member.nil?
+    load_new if library_member.nil?
     if params[:status] == 'true'
-      render :new unless History.create(checkout: Time.now, book_id: @book.id, library_member_id: library_member.id)
+      load_new unless History.create(checkout: Time.now, book_id: @book.id, library_member_id: library_member.id)
     end
   end
 end
