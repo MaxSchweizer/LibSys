@@ -1,42 +1,37 @@
 <h1> New Book</h1>
-<%= form_for :book, url: books_path do |f|  %>
-    <!-- TODO: We should make the error messaging for the user better -->
-    <% if @book.errors.any? %>
-        <div id="error_explanation">
-          <h2>
-            <%= pluralize(@book.errors.count, "error") %> prohibited
-            this book from being created:
-          </h2>
-          <ul>
-            <% @book.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-            <% end %>
-          </ul>
-        </div>
-    <% end %>
-    <p>
-      ISBN:<br>
-      <%= f.text_field :isbn%>
-    </p>
-    <p>
-      Title:<br>
-      <%= f.text_field :title%>
-    </p>
-    <p>
-      Author:<br>
-      <%= f.text_field :author %>
-    </p>
-    <p>
-      Description:<br>
-      <%= f.text_area :description %>
-    </p>
-    <p>
-      <%= f.submit "Submit" %>
-    </p>
 
-    <br>
-    <!-- TODO: We may need to add the a field for where the book is checked out to. We also may need to include the member. -->
-
+<% if @book.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@book.errors.count, "error") %> prohibited
+        this book from being created:
+      </h2>
+      <ul>
+        <% @book.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
 <% end %>
+
+<%= form_tag("/books", method: "post") do %>
+    <% ['isbn', 'title', 'author', 'description'].each do |item| %>
+        <%= label_tag("book[#{item}]", item) %><br>
+        <%= text_field_tag("book[#{item}]") %><br>
+    <% end %>
+    <%= radio_button_tag(:status, "false", :checked => true) %>
+    <%= label_tag(:status_checked_in, "Checked In") %>
+    <%= radio_button_tag(:status, "true") %>
+    <%= label_tag(:status_checked_out, "Checked Out") %><br>
+
+    NOTE: If you are entering a 'Checked In' book then selecting a library member below will not do anything.<br>
+
+    Book Status:
+    <%= select_tag(:library_member, options_for_select(@library_members, @library_members.length)) %>
+    <%= label_tag(:library_member, "Checked Out To This Library Member") %><br>
+
+    <%= submit_tag("Submit") %>
+<% end %>
+
 
 <%= link_to "Show All Books", action: :index %>
