@@ -112,24 +112,43 @@ class BooksControllerTest < ActionController::TestCase
   end
 
    # Test the create
-  test "create new book" do
+  test "create new book fail as librarymember " do
     post :create, book: {isbn: "200", title: "200", author: "200", description: "200" } #, status: "false"}
-    #assert_response :success
-    assert_redirected_to book_path(assigns(@book))
+    assert_response :redirect
+    #assert_redirected_to book_path(assigns(@book))
+  end
+
+  test "create new book suceed as admin " do
+    #replace user with admin
+    user = Admin.create!(:name => "n", :email => "n@g.com", :password => "123")
+    lib_user = LibraryMember.create!(:name => "n2", :email => "n2@g.com", :password => "123")
+    session[:user_id] = user.id
+    post :create, { book: {isbn: "200", title: "200", author: "200", description: "200" } , status: "false",  library_member:lib_user.id }
+    assert_response :success
+    #assert_redirected_to book_path(assigns(@book))
+    assert true
   end
 
   # test "create new book with bad data" do
   #   flunk "Test not implemented yet"
   # end
   #
-  # # Test the new
-  # test "view new book" do
-  #   flunk "Test not implemented yet"
-  # end
-  #
+
+  # Test the new
+  test "view new book as admin" do
+    user = Admin.create!(:name => "n", :email => "n@g.com", :password => "123")
+    session[:user_id] = user.id
+    get :new
+    assert_response :success
+  end
+
+
   # # Test the destroy
   # test "destroy book" do
-  #   flunk "Test not implemented yet"
+  #   bk = BooksController.create!( book: {isbn: "200", title: "200", author: "200", description: "200" } ) #, status: "false"}
+  #
+  #
+  #   assert_response :success
   # end
   #
   # test "destroy book that doesnt exist" do
