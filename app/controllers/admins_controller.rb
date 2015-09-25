@@ -27,8 +27,9 @@ class AdminsController < ApplicationController
 
   def destroy
     @admin = Admin.find params[:id]
-    @admin.destroy
-
+    if @admin != current_user
+      @admin.destroy
+    end
     redirect_to admins_path
   end
 
