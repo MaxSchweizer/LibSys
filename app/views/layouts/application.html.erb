@@ -11,6 +11,11 @@
 <div class="top">
   <h1>LibSys</h1><br>
   <% if logged_in? %>
+      <% if current_user.admin? %>
+          <%= link_to "Admin List", admins_path%>
+          <%= link_to "Members List", library_members_path%>
+      <% end %>
+      <%= link_to "Book List", books_path%>
       <%= form_tag("/books", method: "get") do %>
           <%= label_tag(:query, "Search for:") %>
           <%= text_field_tag(:query) %>
