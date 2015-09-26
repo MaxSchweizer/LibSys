@@ -18,7 +18,6 @@ class Book < ActiveRecord::Base
     histories.where("library_member_id = ?", user.id)
   end
 
-  private
   def last_checked_out
     histories.where(return: [nil]).take
   end

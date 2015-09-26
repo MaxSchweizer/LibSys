@@ -15,10 +15,10 @@
           <%= label_tag(:query, "Search for:") %>
           <%= text_field_tag(:query) %>
           <%= radio_button_tag(:search_type, "isbn", :checked => true) %>
-          <%= label_tag(:search_type_isbn, "isbn") %>
+          <%= label_tag(:search_type_isbn, "Isbn") %>
           <% ["title", "author", "description", "status"].each do |item| %>
               <%= radio_button_tag(:search_type, item) %>
-              <%= label_tag(:search_type_isbn, item) %>
+              <%= label_tag(:search_type_isbn, item.capitalize) %>
           <% end %>
           <%= submit_tag("Search") %>
       <% end %>

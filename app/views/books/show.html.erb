@@ -10,6 +10,7 @@
     <% if current_user.admin? %>
         <td>Checked Out To</td>
     <% end %>
+    <td></td>
   </tr>
 
 
@@ -21,6 +22,21 @@
     <td><%= @book.checked_out? ? "Checked Out" : "Available" %></td>
     <% if current_user.admin? %>
         <td><%= (link_to "#{@book.checked_out_to?.email}", library_member_path(@book.checked_out_to?), action: :show) unless @book.checked_out_to?.nil? %></td>
+    <% end %>
+
+
+    <% if current_user.library_member? %>
+        <td>
+          <% if @book.checked_out? %>
+              <% if @book.checked_out_to? == current_user %>
+                  <%= button_to "Return Book", action: :update, controller: :histories, id: @book.last_checked_out %>
+              <% else %>
+                  Book Checked Out To Other User
+              <% end %>
+          <% elsif !@book.checked_out? %>
+              <%= button_to "Checkout Book", action: :create, controller: :histories, data: @book %>
+          <% end %>
+        </td>
     <% end %>
   </tr>
 </table>
