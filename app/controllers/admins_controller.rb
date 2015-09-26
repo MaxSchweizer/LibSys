@@ -8,7 +8,9 @@ class AdminsController < ApplicationController
   end
 
   def edit
-    @admin = Admin.find params[:id]
+    unless @admin == current_user
+      @admin = Admin.find params[:id]
+    end
   end
 
   def update

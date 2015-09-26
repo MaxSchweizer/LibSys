@@ -11,7 +11,8 @@ class Ability
     if user.admin?
       can :read, :all
       can [:edit, :update, :create, :destroy], Admin
-      can [:create], Book
+      can [:create, :edit], Book
+      can [:destroy], LibraryMember
     elsif user.library_member?
       can [:show, :update], LibraryMember
       can [:read], Book
