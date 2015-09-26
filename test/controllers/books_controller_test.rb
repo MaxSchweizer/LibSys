@@ -148,14 +148,16 @@ class BooksControllerTest < ActionController::TestCase
   end
 
 
-  # # Test the destroy
-  # test "destroy book" do
-  #   bk = BooksController.create!( book: {isbn: "200", title: "200", authors: "200", description: "200" } ) #, status: "false"}
-  #
-  #
-  #   assert_response :success
-  # end
-  #
+  # Test the destroy
+  test "destroy book" do
+    @bk = Book.find_by(title: "Yellow")
+    assert_difference assigns(:books).length, -1 do
+      delete book_path(@bk.id)
+    end
+    assert_response :success
+    assert_redirected_to :book , :action => "show"
+  end
+
   # test "destroy book that doesnt exist" do
   #   flunk "Test not implemented yet"
   # end
