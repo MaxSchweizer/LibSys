@@ -14,7 +14,7 @@ class BooksControllerTest < ActionController::TestCase
   end
 
 #===== test search features =============================================================================================================
-  test "should be able to search by author with exact string" do
+  test "should be able to search by authors with exact string" do
     get :index, {"search_type" => "authors", "query" => "Author0"}
     assert_response :success
     assert_not_nil assigns :books
@@ -23,7 +23,7 @@ class BooksControllerTest < ActionController::TestCase
     assert "ISBN0", assigns(:books)[0].isbn
   end
 
-  test "should be able to search by author with weak match string" do
+  test "should be able to search by authors with weak match string" do
     get :index, {"search_type" => "authors", "query" => "0"}
     assert_response :success
     assert_not_nil assigns :books
@@ -123,10 +123,10 @@ class BooksControllerTest < ActionController::TestCase
     user = Admin.create!(:name => "n", :email => "n@g.com", :password => "123")
     lib_user = LibraryMember.create!(:name => "n2", :email => "n2@g.com", :password => "123")
     session[:user_id] = user.id
-    post :create, { book: {isbn: "200", title: "200", author: "200", description: "200" } , status: "false",  library_member:lib_user.id }
+    post :create, { book: {isbn: "200", title: "200", authors: "200", description: "200" } , status: "false",  library_member:lib_user.id }
     assert_response :redirect
     assert_redirected_to Book.find_by(title: "200"), :action => "show"
-    assert "200", Book.find_by(title: "200").author
+    assert "200", Book.find_by(title: "200").authors
   end
 
   test "create new book with bad isbn data" do
@@ -134,7 +134,7 @@ class BooksControllerTest < ActionController::TestCase
     user = Admin.create!(:name => "n", :email => "n@g.com", :password => "123")
     lib_user = LibraryMember.create!(:name => "n2", :email => "n2@g.com", :password => "123")
     session[:user_id] = user.id
-    post :create, { book: {isbn: "0101", title: "200", author: "200", description: "200" } , status: "false",  library_member:lib_user.id }
+    post :create, { book: {isbn: "0101", title: "200", authors: "200", description: "200" } , status: "false",  library_member:lib_user.id }
     assert_response :redirect
   end
 
