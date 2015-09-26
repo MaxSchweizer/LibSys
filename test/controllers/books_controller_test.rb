@@ -150,9 +150,9 @@ class BooksControllerTest < ActionController::TestCase
 
   # Test the destroy
   test "destroy book" do
-    @bk = Book.find_by(title: "Yellow")
-    assert_difference assigns(:books).length, -1 do
-      delete book_path(@bk.id)
+    @bk = Book.find_by(title: "Yellow").id
+    assert_difference 'Book.count', -1 do
+      delete :destroy, id: @bk
     end
     assert_response :success
     assert_redirected_to :book , :action => "show"
