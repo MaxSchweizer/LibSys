@@ -25,6 +25,10 @@
       <% if current_user.admin? %>
           <%= link_to "Show All Admins", admins_path%>
           <%= link_to "Show All Library Members", library_members_path%>
+          <%= link_to "My Profile", admin_path(current_user.id)%>
+      <% end %>
+      <% if current_user.library_member? %>
+          <%= link_to "My Profile", library_member_path(current_user.id) %>
       <% end %>
       <%= link_to "Show All Books", books_path %>
   <% end %>
