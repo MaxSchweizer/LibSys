@@ -8,7 +8,7 @@
     <td>Authors</td>
     <td>Status</td>
     <td></td>
-    <% if can? :destroy, @books %>
+    <% if current_user.admin? %>
         <td></td>
     <% end %>
   </tr>
@@ -21,7 +21,7 @@
         <td><%= book.authors %></td>
         <td><%= book.checked_out? ? "Checked Out" : "Available" %></td>
         <td><%= link_to "View Book's Detail", book_url(book) %></td>
-        <% if can? :destroy, @books %>
+        <% if current_user.admin? %>
             <td><%= link_to "Delete Book", book_path(book), method: :delete, data: {confirm: 'Are you sure?'} %></td>
         <% end %>
       </tr>

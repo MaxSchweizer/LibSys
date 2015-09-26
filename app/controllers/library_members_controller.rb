@@ -13,11 +13,12 @@ class LibraryMembersController < ApplicationController
 
   def update
     @library_member = LibraryMember.find params[:id]
-
-    if @library_member.update library_member_params
-      redirect_to @library_member
-    else
-      render :edit
+    if @library_member == current_user
+      if @library_member.update library_member_params
+        redirect_to @library_member
+      else
+        render :edit
+      end
     end
   end
 
