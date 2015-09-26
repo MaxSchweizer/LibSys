@@ -21,7 +21,7 @@
     <td>ISBN</td>
     <td>Title</td>
     <td>Author</td>
-    <td>Checked Out</td>
+    <td>Status</td>
     <td>Checkout Date</td>
     <td>Return Date</td>
   </tr>
@@ -30,8 +30,8 @@
       <tr>
         <td><%= history.book.isbn %></td>
         <td><%= history.book.title %></td>
-        <td><%= history.book.author %></td>
-        <td><%= history.checked_out? %></td>
+        <td><%= history.book.authors %></td>
+        <td><%= history.checked_out? ? "Checked Out" : "Available" %></td>
         <td><%= history.checkout %></td>
         <td><%= history.return %></td>
       </tr>
@@ -53,7 +53,7 @@
           <tr>
             <td><%= history.book.isbn %></td>
             <td><%= history.book.title %></td>
-            <td><%= history.book.author %></td>
+            <td><%= history.book.authors %></td>
             <td><%= history.checkout %></td>
             <td><%= button_to "Return Book", action: :update, controller: :histories, id: history.id %></td>
           </tr>

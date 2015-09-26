@@ -5,8 +5,8 @@
     <td>ISBN</td>
     <td>Title</td>
     <td>Description</td>
-    <td>Author</td>
-    <td>Checked Out</td>
+    <td>Authors</td>
+    <td>Status</td>
     <td></td>
     <% if can? :destroy, @books %>
         <td></td>
@@ -18,8 +18,8 @@
         <td><%= book.isbn %></td>
         <td><%= book.title %></td>
         <td><%= book.description %></td>
-        <td><%= book.author %></td>
-        <td><%= book.checked_out? %></td>
+        <td><%= book.authors %></td>
+        <td><%= book.checked_out? ? "Checked Out" : "Available" %></td>
         <td><%= link_to "View Book's Detail", book_url(book) %></td>
         <% if can? :destroy, @books %>
             <td><%= link_to "Delete Book", book_path(book), method: :delete, data: {confirm: 'Are you sure?'} %></td>

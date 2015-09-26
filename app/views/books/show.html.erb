@@ -5,9 +5,9 @@
     <td>ISBN</td>
     <td>Title</td>
     <td>Description</td>
-    <td>Author</td>
-    <td>Checked Out</td>
-    <% if can? :view_others, @books %>
+    <td>Authors</td>
+    <td>Status</td>
+    <% if current_user.admin? %>
         <td>Checked Out To</td>
     <% end %>
   </tr>
@@ -17,9 +17,9 @@
     <td><%= @book.isbn %></td>
     <td><%= @book.title %></td>
     <td><%= @book.description %></td>
-    <td><%= @book.author %></td>
-    <td><%= @book.checked_out? %></td>
-    <% if can? :view_others, @books %>
+    <td><%= @book.authors %></td>
+    <td><%= @book.checked_out? ? "Checked Out" : "Available" %></td>
+    <% if current_user.admin? %>
         <td><%= (link_to "#{@book.checked_out_to?.email}", library_member_path(@book.checked_out_to?), action: :show) unless @book.checked_out_to?.nil? %></td>
     <% end %>
   </tr>
@@ -31,7 +31,7 @@
   <tr>
     <td>Email</td>
     <td>Name</td>
-    <td>Checked Out</td>
+    <td>Status</td>
     <td>Checkout Date</td>
     <td>Return Date</td>
   </tr>
@@ -41,7 +41,7 @@
       <tr>
         <td><%= link_to "#{history.library_member.email}", library_member_path(history.library_member), action: :show %></td>
         <td><%= history.library_member.name %></td>
-        <td><%= history.checked_out? %></td>
+        <td><%= history.checked_out? ? "Checked Out" : "Available" %></td>
         <td><%= history.checkout %></td>
         <td><%= history.return %></td>
       </tr>

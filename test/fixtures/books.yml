@@ -3,7 +3,7 @@ book_<%= n %>:
   isbn: <%= "ISBN#{n}" %>
   title: <%= "Title#{n}" %>
   description: <%= "Description#{n}" %>
-  author: <%= "Author#{n}" %>
+  authors: <%= "Author#{n}" %>
 <% end %>
 
 
@@ -11,14 +11,14 @@ book_101:
   isbn: "0101"
   title: "Yellow"
   description: "The color Yellow."
-  author: "Color Wheel"
+  authors: "Color Wheel"
 
 
 book_102:
   isbn: "0102"
   title: "Yellow Brick"
   description: "The brick of color Yellow."
-  author: "Color Wheel"
+  authors: "Color Wheel"
 
 
 
@@ -26,12 +26,12 @@ book_103:
   isbn: "0103"
   title: "Yellow Brick Road"
   description: "Follow the Yellow Brick Road!"
-  author: " OZ "
+  authors: " OZ "
 
 
 book_104:
   isbn: "0104"
   title: "Red"
   description: "The color Red."
-  author: "Color Wheel"
+  authors: "Color Wheel"
 

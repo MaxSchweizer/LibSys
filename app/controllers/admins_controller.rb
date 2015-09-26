@@ -14,10 +14,12 @@ class AdminsController < ApplicationController
   def update
     @admin = Admin.find params[:id]
 
-    if @admin.update admin_params
-      redirect_to @admin
-    else
-      render :edit
+    if @admin == current_user
+      if @admin.update admin_params
+        redirect_to @admin
+      else
+        render :edit
+      end
     end
   end
 
@@ -27,7 +29,7 @@ class AdminsController < ApplicationController
 
   def destroy
     @admin = Admin.find params[:id]
-    if @admin != current_user
+    unless @admin == current_user || @admin.email == 'admin@ncsu.edu'
       @admin.destroy
     end
     redirect_to admins_path

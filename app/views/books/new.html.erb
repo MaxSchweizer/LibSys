@@ -15,16 +15,16 @@
 <% end %>
 
 <%= form_tag("/books", method: "post") do %>
-    <% ['isbn', 'title', 'author', 'description'].each do |item| %>
-        <%= label_tag("book[#{item}]", item) %><br>
+    <% ['isbn', 'title', 'authors', 'description'].each do |item| %>
+        <%= label_tag("book[#{item}]", item.capitalize) %><br>
         <%= text_field_tag("book[#{item}]") %><br>
     <% end %>
     <%= radio_button_tag(:status, "false", :checked => true) %>
-    <%= label_tag(:status_checked_in, "Checked In") %>
+    <%= label_tag(:status_checked_in, "Available") %>
     <%= radio_button_tag(:status, "true") %>
     <%= label_tag(:status_checked_out, "Checked Out") %><br>
 
-    NOTE: If you are entering a 'Checked In' book then selecting a library member below will not do anything.<br>
+    NOTE: If you are entering a 'Available' book then selecting a library member below will not do anything.<br>
 
     Book Status:
     <%= select_tag(:library_member, options_for_select(@library_members, @library_members.length)) %>

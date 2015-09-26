@@ -11,21 +11,20 @@
 <div class="top">
   <h1>LibSys</h1><br>
   <% if logged_in? %>
-      <% if current_user.admin? %>
-          <%= link_to "Admin List", admins_path%>
-          <%= link_to "Members List", library_members_path%>
-      <% end %>
-      <%= link_to "Book List", books_path%>
       <%= form_tag("/books", method: "get") do %>
           <%= label_tag(:query, "Search for:") %>
           <%= text_field_tag(:query) %>
           <%= radio_button_tag(:search_type, "isbn", :checked => true) %>
-          <%= label_tag(:search_type_isbn, "isbn") %>
+          <%= label_tag(:search_type_isbn, "Isbn") %>
           <% ["title", "author", "description", "status"].each do |item| %>
               <%= radio_button_tag(:search_type, item) %>
-              <%= label_tag(:search_type_isbn, item) %>
+              <%= label_tag(:search_type_isbn, item.capitalize) %>
           <% end %>
           <%= submit_tag("Search") %>
+      <% end %>
+      <% if current_user.admin? %>
+          <%= link_to "Show All Admins", admins_path%>
+          <%= link_to "Show All Library Members", library_members_path%>
       <% end %>
       <%= link_to "Show All Books", books_path %>
   <% end %>
