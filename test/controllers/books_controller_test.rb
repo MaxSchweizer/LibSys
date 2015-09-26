@@ -63,7 +63,7 @@ class BooksControllerTest < ActionController::TestCase
     assert_not_nil assigns :books
 
     assert (assigns(:books).length == 1), "Incorrect number of books returned. Check fixtures for details."
-    assert "OZ", assigns(:books)[0].author
+    assert "OZ", assigns(:books)[0].authors
   end
 
 
@@ -81,7 +81,7 @@ class BooksControllerTest < ActionController::TestCase
     assert_not_nil assigns :books
 
     assert (assigns(:books).length == 1), "Incorrect number of books returned. Check fixtures for details."
-    assert "OZ", assigns(:books)[0].author
+    assert "OZ", assigns(:books)[0].authors
   end
 
   test "should be able to search checked out = true " do
@@ -113,7 +113,7 @@ class BooksControllerTest < ActionController::TestCase
 
    # Test the create
   test "create new book fail as librarymember " do
-    post :create, book: {isbn: "200", title: "200", author: "200", description: "200" } #, status: "false"}
+    post :create, book: {isbn: "200", title: "200", authors: "200", description: "200" } #, status: "false"}
     assert_response :redirect
     #assert_redirected_to book_path(assigns(@book))
   end
@@ -123,7 +123,7 @@ class BooksControllerTest < ActionController::TestCase
     user = Admin.create!(:name => "n", :email => "n@g.com", :password => "123")
     lib_user = LibraryMember.create!(:name => "n2", :email => "n2@g.com", :password => "123")
     session[:user_id] = user.id
-    post :create, { book: {isbn: "200", title: "200", author: "200", description: "200" } , status: "false",  library_member:lib_user.id }
+    post :create, { book: {isbn: "200", title: "200", authors: "200", description: "200" } , status: "false",  library_member:lib_user.id }
     assert_response :success
     #assert_redirected_to book_path(assigns(@book))
     assert true
@@ -145,7 +145,7 @@ class BooksControllerTest < ActionController::TestCase
 
   # # Test the destroy
   # test "destroy book" do
-  #   bk = BooksController.create!( book: {isbn: "200", title: "200", author: "200", description: "200" } ) #, status: "false"}
+  #   bk = BooksController.create!( book: {isbn: "200", title: "200", authors: "200", description: "200" } ) #, status: "false"}
   #
   #
   #   assert_response :success

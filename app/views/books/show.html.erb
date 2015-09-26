@@ -5,7 +5,7 @@
     <td>ISBN</td>
     <td>Title</td>
     <td>Description</td>
-    <td>Author</td>
+    <td>Authors</td>
     <td>Checked Out</td>
     <% if current_user.admin? %>
         <td>Checked Out To</td>
@@ -17,7 +17,7 @@
     <td><%= @book.isbn %></td>
     <td><%= @book.title %></td>
     <td><%= @book.description %></td>
-    <td><%= @book.author %></td>
+    <td><%= @book.authors %></td>
     <td><%= @book.checked_out? %></td>
     <% if current_user.admin? %>
         <td><%= (link_to "#{@book.checked_out_to?.email}", library_member_path(@book.checked_out_to?), action: :show) unless @book.checked_out_to?.nil? %></td>

@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-  SEARCH_ACTIONS = ["isbn", "title", "author", "description"]
+  SEARCH_ACTIONS = ["isbn", "title", "authors", "description"]
 
   def index
     search_type, query = params["search_type"], params["query"]
@@ -53,7 +53,7 @@ class BooksController < ApplicationController
 
   private
   def book_params
-    params.require(:book).permit(:isbn, :title, :author, :description, :status)
+    params.require(:book).permit(:isbn, :title, :authors, :description, :status)
   end
 
   def save_book_history

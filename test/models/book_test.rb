@@ -5,7 +5,7 @@ class BookTest < ActiveSupport::TestCase
   # Test the model contraints
   test "should save book with all fields" do
     book = Book.new
-    book.author= "author"
+    book.authors= "author"
     book.title= "title"
     book.description= "description"
     book.isbn="isbn"
@@ -19,7 +19,7 @@ class BookTest < ActiveSupport::TestCase
 
   test "should not save a book with no isbn" do
     book = Book.new
-    book.author= "author"
+    book.authors= "author"
     book.title= "title"
     book.description= "description"
     assert_not book.save
@@ -27,7 +27,7 @@ class BookTest < ActiveSupport::TestCase
 
   test "should not save book with non-unique isbn" do
     book = Book.new
-    book.author= "author"
+    book.authors= "author"
     book.title= "title"
     book.description= "description"
     book.isbn="ISBN0"
