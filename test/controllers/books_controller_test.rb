@@ -135,12 +135,7 @@ class BooksControllerTest < ActionController::TestCase
     lib_user = LibraryMember.create!(:name => "n2", :email => "n2@g.com", :password => "123")
     session[:user_id] = user.id
     post :create, { book: {isbn: "0101", title: "200", author: "200", description: "200" } , status: "false",  library_member:lib_user.id }
-    #assert_response :redirect
-    assert_redirected_to :controller => "book", :action => "new"
-    post :create, { book: {isbn: "200", title: "200", authors: "200", description: "200" } , status: "false",  library_member:lib_user.id }
-    assert_response :success
-    #assert_redirected_to book_path(assigns(@book))
-    assert true
+    assert_response :redirect
   end
 
 
