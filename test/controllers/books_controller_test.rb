@@ -124,15 +124,21 @@ class BooksControllerTest < ActionController::TestCase
     lib_user = LibraryMember.create!(:name => "n2", :email => "n2@g.com", :password => "123")
     session[:user_id] = user.id
     post :create, { book: {isbn: "200", title: "200", author: "200", description: "200" } , status: "false",  library_member:lib_user.id }
-    assert_response :success
-    #assert_redirected_to book_path(assigns(@book))
-    assert true
+    assert_response :redirect
+    assert_redirected_to Book.find_by(title: "200"), :action => "show"
+    assert "200", Book.find_by(title: "200").author
   end
 
-  # test "create new book with bad data" do
-  #   flunk "Test not implemented yet"
-  # end
-  #
+  test "create new book with bad isbn data" do
+    #login as admin
+    user = Admin.create!(:name => "n", :email => "n@g.com", :password => "123")
+    lib_user = LibraryMember.create!(:name => "n2", :email => "n2@g.com", :password => "123")
+    session[:user_id] = user.id
+    post :create, { book: {isbn: "0101", title: "200", author: "200", description: "200" } , status: "false",  library_member:lib_user.id }
+    #assert_response :redirect
+    assert_redirected_to :controller => "book", :action => "new"
+  end
+
 
   # Test the new
   test "view new book as admin" do
