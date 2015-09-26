@@ -1,5 +1,5 @@
 class LibraryMember < User
-  has_many :histories
+  has_many :histories, dependent: :delete_all
   has_many :books, through: :histories
 
   validates :email, :uniqueness => true
