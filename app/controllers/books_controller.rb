@@ -17,6 +17,22 @@ class BooksController < ApplicationController
     @book = Book.new
   end
 
+  def edit
+    library_members_formatted
+    @book = Book.find params[:id]
+  end
+
+  def update
+    @book = Book.find params[:id]
+
+    if @book.update book_params
+      update_book_history
+      redirect_to @book
+    else
+      load_edit
+    end
+  end
+
   def show
     @book = Book.find params[:id]
   end
@@ -44,6 +60,11 @@ class BooksController < ApplicationController
     render :new
   end
 
+  def load_edit
+    library_members_formatted
+    render :edit
+  end
+
   def library_members_formatted
     @library_members = []
     LibraryMember.all.each do |library_member|
@@ -61,6 +82,14 @@ class BooksController < ApplicationController
     load_new if library_member.nil?
     if params[:status] == 'true'
       load_new unless History.create(checkout: Time.now, book_id: @book.id, library_member_id: library_member.id)
+    end
+  end
+
+  def update_book_history
+    library_member = LibraryMember.find params[:library_member]
+    load_edit if library_member.nil?
+    if params[:status] == 'true'
+      load_edit unless History.create(checkout: Time.now, book_id: @book.id, library_member_id: library_member.id)
     end
   end
 end

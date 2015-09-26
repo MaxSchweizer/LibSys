@@ -10,9 +10,10 @@
     <% if current_user.admin? %>
         <td>Checked Out To</td>
     <% end %>
-    <td></td>
+    <% if current_user.library_member? %>
+        <td></td>
+    <% end %>
   </tr>
-
 
   <tr>
     <td><%= @book.isbn %></td>
@@ -21,7 +22,7 @@
     <td><%= @book.authors %></td>
     <td><%= @book.checked_out? ? "Checked Out" : "Available" %></td>
     <% if current_user.admin? %>
-        <td><%= (link_to "#{@book.checked_out_to?.email}", library_member_path(@book.checked_out_to?), action: :show) unless @book.checked_out_to?.nil? %></td>
+        <td><%= @book.checked_out_to?.nil? ? "Not Checked Out" : (link_to "#{@book.checked_out_to?.email}", library_member_path(@book.checked_out_to?), action: :show) %></td>
     <% end %>
 
 
@@ -64,7 +65,7 @@
   <% end %>
 </table>
 
-<% if can? :edit, @books %>
+<% if current_user.admin? %>
     <%= link_to "Edit Book Details", action: :edit %><br>
 <% end %>
 
