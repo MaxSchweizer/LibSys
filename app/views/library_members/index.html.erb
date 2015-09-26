@@ -5,6 +5,7 @@
     <td>Email</td>
     <td>Name</td>
     <td></td>
+    <td></td>
   </tr>
 
   <% @library_members.each do |library_member| %>
@@ -12,6 +13,10 @@
         <td><%= library_member.email %></td>
         <td><%= library_member.name %></td>
         <td><%= link_to "View Library Member Details", library_member_path(library_member.id) %></td>
+        <td><%= unless current_user == @admin
+                  link_to "Delete Library Member", library_member_path(library_member), method: :delete, data:
+                                                         {confirm: 'Are you sure?'}
+                end %></td>
       </tr>
   <% end %>
 </table>

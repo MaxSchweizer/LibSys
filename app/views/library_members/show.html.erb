@@ -12,7 +12,9 @@
   </tr>
 </table>
 
-<%= link_to "Edit Profile Details", action: :edit %>
+<%=if current_user == @library_member
+     link_to "Edit Profile Details", action: :edit
+end%>
 
 <h1>Checkout history</h1>
 
