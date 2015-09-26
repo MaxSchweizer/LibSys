@@ -26,6 +26,11 @@ class LibraryMembersController < ApplicationController
     @library_member = LibraryMember.new
   end
 
+  def destroy
+    @library_member = LibraryMember.find params[:id]
+    @library_member.destroy
+    redirect_to library_members_path
+  end
   def create
     @library_member = LibraryMember.new library_member_params
 
