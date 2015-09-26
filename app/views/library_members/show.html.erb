@@ -21,7 +21,7 @@
     <td>ISBN</td>
     <td>Title</td>
     <td>Author</td>
-    <td>Checked Out</td>
+    <td>Status</td>
     <td>Checkout Date</td>
     <td>Return Date</td>
   </tr>
@@ -31,7 +31,7 @@
         <td><%= history.book.isbn %></td>
         <td><%= history.book.title %></td>
         <td><%= history.book.authors %></td>
-        <td><%= history.checked_out? %></td>
+        <td><%= history.checked_out? ? "Checked Out" : "Available" %></td>
         <td><%= history.checkout %></td>
         <td><%= history.return %></td>
       </tr>
