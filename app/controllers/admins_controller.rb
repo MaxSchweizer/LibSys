@@ -8,18 +8,18 @@ class AdminsController < ApplicationController
   end
 
   def edit
-    unless @admin == current_user
-      @admin = Admin.find params[:id]
-    end
+    @admin = Admin.find params[:id]
   end
 
   def update
     @admin = Admin.find params[:id]
 
-    if @admin.update admin_params
-      redirect_to @admin
-    else
-      render :edit
+    if @admin == current_user
+      if @admin.update admin_params
+        redirect_to @admin
+      else
+        render :edit
+      end
     end
   end
 
