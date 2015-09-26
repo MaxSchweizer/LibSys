@@ -7,4 +7,8 @@ class LibraryMember < User
   def library_member?
     true
   end
+
+  def last_checked_out
+    histories.where(return: [nil]).take
+  end
 end

@@ -90,6 +90,11 @@ class BooksController < ApplicationController
     load_edit if library_member.nil?
     if params[:status] == 'true'
       load_edit unless History.create(checkout: Time.now, book_id: @book.id, library_member_id: library_member.id)
+    else
+      history = @book.last_checked_out
+      if !history.nil? && !history.update(return: Time.now)
+        load_edit
+      end
     end
   end
 end
