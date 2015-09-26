@@ -160,9 +160,20 @@ class BooksControllerTest < ActionController::TestCase
     assert_redirected_to books_path
   end
 
-  # test "destroy book that doesnt exist" do
-  #   flunk "Test not implemented yet"
-  # end
+  #edit
 
+  #update
+  
+  #load_new
+
+  #load_edit
+
+  #library_members_formatted
+
+  #book_params
+
+  #save_book_history
+
+  #update_book_history
 
 end
