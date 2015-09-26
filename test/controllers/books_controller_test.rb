@@ -118,7 +118,7 @@ class BooksControllerTest < ActionController::TestCase
     #assert_redirected_to book_path(assigns(@book))
   end
 
-  test "create new book suceed as admin " do
+  test "create new book succeed as admin " do
     #replace user with admin
     user = Admin.create!(:name => "n", :email => "n@g.com", :password => "123")
     lib_user = LibraryMember.create!(:name => "n2", :email => "n2@g.com", :password => "123")
@@ -150,12 +150,12 @@ class BooksControllerTest < ActionController::TestCase
 
   # Test the destroy
   test "destroy book" do
+    user = Admin.create!(:name => "n", :email => "n@g.com", :password => "123")
+    session[:user_id] = user.id
     @bk = Book.find_by(title: "Yellow").id
-    #assert_difference 'Book.count', -1 do
-      delete :destroy, id: @bk
-    #end
+    delete :destroy, id: @bk
     assert_response :redirect
-    assert_redirected_to books_path #:book , :action => "index"
+    assert_redirected_to books_path
   end
 
   # test "destroy book that doesnt exist" do
