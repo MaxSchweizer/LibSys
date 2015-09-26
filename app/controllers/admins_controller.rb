@@ -29,7 +29,7 @@ class AdminsController < ApplicationController
 
   def destroy
     @admin = Admin.find params[:id]
-    if @admin != current_user
+    unless @admin == current_user || @admin.email == 'admin@ncsu.edu'
       @admin.destroy
     end
     redirect_to admins_path
