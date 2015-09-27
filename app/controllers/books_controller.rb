@@ -26,7 +26,7 @@ class BooksController < ApplicationController
     @book = Book.find params[:id]
 
     if @book.update book_params
-      update_book_history
+      update_book_history unless params[:library_member].nil?
       redirect_to @book
     else
       load_edit
@@ -48,7 +48,7 @@ class BooksController < ApplicationController
     @book = Book.new book_params
 
     if @book.save
-      save_book_history
+      save_book_history unless params[:library_member].nil?
       redirect_to @book
     else
       load_new
