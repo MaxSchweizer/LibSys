@@ -1,4 +1,8 @@
-<h2>Current Book</h2>
+<h2>Book Details</h2>
+
+<% if current_user.admin? %>
+    <%= link_to raw('<span class="glyphicon glyphicon-pencil"></span> Edit Details'), action: :edit, class: "btn btn-default" %><br>
+<% end %>
 
 <table class="table table-hover">
   <thead>
@@ -46,7 +50,7 @@
   </tbody>
 </table>
 
-<h2>Checkout history</h2>
+<h2>Book Checkout History</h2>
 
 <table class="table table-hover">
   <thead>
@@ -72,7 +76,3 @@
   <% end %>
   </tbody>
 </table>
-
-<% if current_user.admin? %>
-    <%= link_to "Edit Book Details", action: :edit %><br>
-<% end %>
