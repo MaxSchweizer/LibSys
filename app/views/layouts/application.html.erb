@@ -8,45 +8,24 @@
 </head>
 <body>
 
-<div class="top">
-  <h1>LibSys</h1><br>
-  <% if logged_in? %>
-      <%= form_tag("/books", method: "get") do %>
-          <%= label_tag(:query, "Search for:") %>
-          <%= text_field_tag(:query) %>
-          <%= radio_button_tag(:search_type, "isbn", :checked => true) %>
-          <%= label_tag(:search_type_isbn, "Isbn") %>
-          <% ["title", "authors", "description", "status"].each do |item| %>
-              <%= radio_button_tag(:search_type, item) %>
-              <%= label_tag(:search_type_isbn, item.capitalize) %>
-          <% end %>
-          <%= submit_tag("Search") %>
-      <% end %>
-      <% if current_user.admin? %>
-          <%= link_to "Show All Admins", admins_path%>
-          <%= link_to "Show All Library Members", library_members_path%>
-          <%= link_to "My Profile", admin_path(current_user.id)%>
-      <% end %>
-      <% if current_user.library_member? %>
-          <%= link_to "My Profile", library_member_path(current_user.id) %>
-      <% end %>
-      <%= link_to "Show All Books", books_path %>
-  <% end %>
+<%= render 'shared/header' %>
+
+<div id="main-container" class="container">
+  <div class="row">
+    <div id="sidebar" class="col-xs-3">
+      TODO: This is where all of the links for the pages will go...
+    </div>
+    <div id="content" class="col-xs-9">
+      <% flash.each do |name, msg| %>
+          <%= content_tag :div, msg, class: name %>
+      <% end %><br>
+
+      <%= yield %>
+    </div>
+  </div>
 </div>
 
-<div class="content">
-  <% flash.each do |name, msg| %>
-      <%= content_tag :div, msg, class: name %>
-  <% end %><br>
+<%= render 'shared/footer' %>
 
-  <%= yield %>
-
-</div>
-
-<% if logged_in? %>
-    Currently Logged in as: <%= current_user.email %> with role of <%= current_user.type %>
-    <%= link_to "Log Out", logout_path, method: :delete %>
-<% end %>
-<br><br><br>
 </body>
 </html>
