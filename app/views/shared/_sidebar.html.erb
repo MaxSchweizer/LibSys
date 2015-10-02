@@ -5,9 +5,11 @@
     <% if current_user.admin? %>
         <%= link_to "Show All Admins", admins_path, class: 'btn btn-default btn-block' %>
         <%= link_to "Show All Library Members", library_members_path, class: 'btn btn-default btn-block' %>
-        <%= link_to "My Profile", admin_path(current_user.id), class: 'btn btn-default btn-block' %>
+        <%= link_to "Show My Profile", admin_path(current_user.id), class: 'btn btn-default btn-block' %>
     <% end %>
     <% if current_user.library_member? %>
-        <%= link_to "My Profile", library_member_path(current_user.id), class: 'btn btn-default btn-block' %>
+        <%= link_to "Show My Profile", library_member_path(current_user.id), class: 'btn btn-default btn-block' %>
     <% end %>
+    <hr>
+    <%= link_to "Log Out", logout_path, method: :delete, class: 'btn btn-primary btn-block' %>
 <% end %>
