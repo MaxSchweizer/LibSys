@@ -16,9 +16,9 @@
       <tr>
         <td><%= admin.email %></td>
         <td><%= admin.name %></td>
-        <td><%= link_to "View Admin Details", admin_path(admin) %></td>
+        <td><%= link_to "View Admin's Details", admin_path(admin) %></td>
         <td><%= unless current_user == admin || admin.email == 'admin@ncsu.edu'
-                  link_to "Delete Admin", admin_path(admin), method: :delete, data: {confirm: 'Are you sure?'}
+                  link_to "Delete Admin", admin_path(admin), method: :delete, data: {confirm: 'Are you sure?'}, class: "btn btn-danger"
                 end %></td>
       </tr>
   <% end %>

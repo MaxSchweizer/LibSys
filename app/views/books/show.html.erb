@@ -62,7 +62,6 @@
   <tbody>
   <% history = current_user.admin? ? @book.histories : @book.my_history(current_user)
      history.each do |history| %>
-
       <tr>
         <td><%= link_to "#{history.library_member.email}", library_member_path(history.library_member), action: :show %></td>
         <td><%= history.library_member.name %></td>
@@ -77,5 +76,3 @@
 <% if current_user.admin? %>
     <%= link_to "Edit Book Details", action: :edit %><br>
 <% end %>
-
-<%= link_to "See All Books", action: :index %>

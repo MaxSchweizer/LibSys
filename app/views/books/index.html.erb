@@ -25,7 +25,7 @@
         <td><%= book.checked_out? ? "Checked Out" : "Available" %></td>
         <td><%= link_to "View Book's Detail", book_url(book) %></td>
         <% if current_user.admin? %>
-            <td><%= link_to "Delete Book", book_path(book), method: :delete, data: {confirm: 'Are you sure?'} %></td>
+            <td><%= link_to "Delete Book", book_path(book), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger' %></td>
         <% end %>
       </tr>
   <% end %>
