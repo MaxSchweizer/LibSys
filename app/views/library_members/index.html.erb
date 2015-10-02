@@ -1,13 +1,16 @@
 <h1>List of all library members</h1>
 
-<table class="table">
+<table class="table table-hover">
+  <thead>
   <tr>
-    <td>Email</td>
-    <td>Name</td>
-    <td></td>
-    <td></td>
+    <th>Email</th>
+    <th>Name</th>
+    <th></th>
+    <th></th>
   </tr>
+  </thead>
 
+  <tbody>
   <% @library_members.each do |library_member| %>
       <tr>
         <td><%= library_member.email %></td>
@@ -19,4 +22,5 @@
                 end %></td>
       </tr>
   <% end %>
+  </tbody>
 </table>

@@ -1,20 +1,23 @@
 <h1>Current Book</h1>
 
-<table class="table">
+<table class="table table-hover">
+  <thead>
   <tr>
-    <td>ISBN</td>
-    <td>Title</td>
-    <td>Description</td>
-    <td>Authors</td>
-    <td>Status</td>
+    <th>ISBN</th>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Authors</th>
+    <th>Status</th>
     <% if current_user.admin? %>
-        <td>Checked Out To</td>
+        <th>Checked Out To</th>
     <% end %>
     <% if current_user.library_member? %>
-        <td></td>
+        <th></th>
     <% end %>
   </tr>
+  </thead>
 
+  <tbody>
   <tr>
     <td><%= @book.isbn %></td>
     <td><%= @book.title %></td>
@@ -40,21 +43,26 @@
         </td>
     <% end %>
   </tr>
+  </tbody>
 </table>
 
 <h1>Checkout history</h1>
 
-<table class="table">
+<table class="table table-hover">
+  <thead>
   <tr>
-    <td>Email</td>
-    <td>Name</td>
-    <td>Status</td>
-    <td>Checkout Date</td>
-    <td>Return Date</td>
+    <th>Email</th>
+    <th>Name</th>
+    <th>Status</th>
+    <th>Checkout Date</th>
+    <th>Return Date</th>
   </tr>
+  </thead>
 
+  <tbody>
   <% history = current_user.admin? ? @book.histories : @book.my_history(current_user)
      history.each do |history| %>
+
       <tr>
         <td><%= link_to "#{history.library_member.email}", library_member_path(history.library_member), action: :show %></td>
         <td><%= history.library_member.name %></td>
@@ -63,6 +71,7 @@
         <td><%= history.return %></td>
       </tr>
   <% end %>
+  </tbody>
 </table>
 
 <% if current_user.admin? %>

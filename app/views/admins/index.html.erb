@@ -1,14 +1,18 @@
 <h1>List of Admin</h1>
 
-<table class="table">
+<table class="table table-hover">
+  <thead>
   <tr>
-    <td>Email</td>
-    <td>Name</td>
-    <td></td>
-    <td></td>
+    <th>Email</th>
+    <th>Name</th>
+    <th></th>
+    <th></th>
   </tr>
+  </thead>
 
+  <tbody>
   <% @admins.each do |admin| %>
+
       <tr>
         <td><%= admin.email %></td>
         <td><%= admin.name %></td>
@@ -17,8 +21,8 @@
                   link_to "Delete Admin", admin_path(admin), method: :delete, data: {confirm: 'Are you sure?'}
                 end %></td>
       </tr>
-
   <% end %>
+  </tbody>
 </table>
 
 <%= link_to "Create New Admin", action: :new %>

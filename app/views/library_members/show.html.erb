@@ -1,33 +1,40 @@
 <h1>Library Member Details</h1>
 
-<table class="table">
+<table class="table table-hover">
+  <thead>
   <tr>
-    <td>Email</td>
-    <td>Name</td>
+    <th>Email</th>
+    <th>Name</th>
   </tr>
+  </thead>
 
+  <tbody>
   <tr>
     <td><%= @library_member.email %></td>
     <td><%= @library_member.name %></td>
   </tr>
+  </tbody>
 </table>
 
-<%=if current_user == @library_member
-     link_to "Edit Profile Details", action: :edit
-end%>
+<%= if current_user == @library_member
+      link_to "Edit Profile Details", action: :edit
+    end %>
 
 <h1>Checkout history</h1>
 
-<table class="table">
+<table class="table table-hover">
+  <thead>
   <tr>
-    <td>ISBN</td>
-    <td>Title</td>
-    <td>Author</td>
-    <td>Status</td>
-    <td>Checkout Date</td>
-    <td>Return Date</td>
+    <th>ISBN</th>
+    <th>Title</th>
+    <th>Author</th>
+    <th>Status</th>
+    <th>Checkout Date</th>
+    <th>Return Date</th>
   </tr>
+  </thead>
 
+  <tbody>
   <% @library_member.histories.each do |history| %>
       <tr>
         <td><%= history.book.isbn %></td>
@@ -38,18 +45,22 @@ end%>
         <td><%= history.return %></td>
       </tr>
   <% end %>
+  </tbody>
 </table>
 
 <h1>Currently Checkout Books</h1>
-<table class="table">
+<table class="table table-hover">
+  <thead>
   <tr>
-    <td>ISBN</td>
-    <td>Title</td>
-    <td>Author</td>
-    <td>Checkout Date</td>
-    <td></td>
+    <th>ISBN</th>
+    <th>Title</th>
+    <th>Author</th>
+    <th>Checkout Date</th>
+    <th></th>
   </tr>
+  </thead>
 
+  <tbody>
   <% @library_member.histories.each do |history| %>
       <% if history.return.nil? %>
           <tr>
@@ -61,4 +72,5 @@ end%>
           </tr>
       <% end %>
   <% end %>
+  </tbody>
 </table>
