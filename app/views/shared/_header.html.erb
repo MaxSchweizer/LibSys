@@ -1,18 +1,32 @@
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-default" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <h1>LibSys</h1>
       <% if logged_in? %>
-          <%= form_tag("/books", method: "get") do %>
-              <%= label_tag(:query, "Search for:") %>
-              <%= text_field_tag(:query) %>
-              <%= radio_button_tag(:search_type, "isbn", :checked => true) %>
-              <%= label_tag(:search_type_isbn, "Isbn") %>
-              <% ["title", "authors", "description", "status"].each do |item| %>
-                  <%= radio_button_tag(:search_type, item) %>
-                  <%= label_tag(:search_type_isbn, item.capitalize) %>
-              <% end %>
-              <%= submit_tag("Search") %>
+          <%= form_tag "/books", method: "get", class: "form-inline" do %>
+
+              <div class="form-group">
+                <%= label_tag :query, "Search books for:", class: "control-label" %>
+                <%= text_field_tag :query, "", class: "form-control" %>
+              </div>
+
+              <div class="form-group">
+                <%= radio_button_tag :search_type, "isbn", :checked => true %>
+                <%= label_tag :search_type_isbn, "Isbn" %>
+                <% ["title", "authors", "description"].each do |item| %>
+                    <%= radio_button_tag :search_type, item %>
+                    <%= label_tag :search_type_isbn, item.capitalize %>
+                <% end %>
+              </div>
+
+              <div class="form-group">
+                <%= submit_tag "Search", class: 'btn btn-default' %>
+              </div>
+
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+              <%= link_to 'Checked Out Books', '/books?utf8=✓&query=true&search_type=status', class: 'btn btn-default' %>
+              <%= link_to 'Available Books', '/books?utf8=✓&query=false&search_type=status', class: 'btn btn-default' %>
           <% end %>
       <% end %>
     </div>
