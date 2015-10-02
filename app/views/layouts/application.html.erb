@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
   <title>LibSys</title>
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
@@ -13,8 +13,9 @@
 <div id="main-container" class="container">
   <div class="row">
     <div id="sidebar" class="col-xs-3">
-      TODO: This is where all of the links for the pages will go...
+      <%= render 'shared/sidebar' %>
     </div>
+
     <div id="content" class="col-xs-9">
       <% flash.each do |name, msg| %>
           <%= content_tag :div, msg, class: name %>
