@@ -5,6 +5,8 @@
       <% if logged_in? %>
           Currently Logged in as: <%= current_user.email %> with role of <%= current_user.type %>
           <%= link_to "Log Out", logout_path, method: :delete %>
+      <% else %>
+          Not currently logged into LibSys.  Please <%= link_to 'login', login_url %>.
       <% end %>
       <br><br><br>
     </div>

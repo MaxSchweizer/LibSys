@@ -2,7 +2,7 @@
 
 Please fill out your credentials to login.<br>
 
-<%= form_for(:login, url: login_path, :html => {:class => "form"}) do |f| %>
+<%= form_for :login, url: login_path, :html => {:class => "form"} do |f| %>
 
     <div class="field form-group">
       <%= f.label :email, class: "col-xs-2 control-label" %>
