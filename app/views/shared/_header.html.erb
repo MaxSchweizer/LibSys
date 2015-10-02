@@ -17,16 +17,14 @@
                     <%= radio_button_tag :search_type, item %>
                     <%= label_tag :search_type_isbn, item.capitalize %>
                 <% end %>
-              </div>
-
-              <div class="form-group">
                 <%= submit_tag "Search", class: 'btn btn-default' %>
               </div>
 
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-              <%= link_to 'Checked Out Books', '/books?utf8=✓&query=true&search_type=status', class: 'btn btn-default' %>
-              <%= link_to 'Available Books', '/books?utf8=✓&query=false&search_type=status', class: 'btn btn-default' %>
+              <div class="form-group">
+                <%= label_tag :status, "Show Books With Status:" %>
+                <%= link_to 'Checked Out', '/books?utf8=✓&query=true&search_type=status', class: 'btn btn-default' %>
+                <%= link_to 'Available', '/books?utf8=✓&query=false&search_type=status', class: 'btn btn-default' %>
+              </div>
           <% end %>
       <% end %>
     </div>
