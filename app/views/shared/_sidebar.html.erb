@@ -1,5 +1,5 @@
 <% if logged_in? %>
-    <h1>Navigation</h1>
+    <h2>Navigation</h2>
 
     <%= link_to "Show All Books", books_path, class: 'btn btn-default btn-block' %>
     <% if current_user.admin? %>
