@@ -17,8 +17,8 @@
         <td><%= library_member.name %></td>
         <td><%= link_to "View Library Member's Details", library_member_path(library_member.id) %></td>
         <td><%= unless current_user == @admin
-                  link_to "Delete Library Member", library_member_path(library_member), method: :delete, data:
-                                                         {confirm: 'Are you sure?'}, class: 'btn btn-danger'
+                  link_to raw('<span class="glyphicon glyphicon-trash"></span> Delete Book'), library_member_path(library_member), method: :delete, data:
+                                                                                                    {confirm: 'Are you sure?'}, class: 'btn btn-danger'
                 end %></td>
       </tr>
   <% end %>
