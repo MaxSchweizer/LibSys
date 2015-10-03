@@ -29,7 +29,7 @@
           <td><%= book.description %></td>
           <td><%= book.authors %></td>
           <td><%= book.checked_out? ? "Checked Out" : "Available" %></td>
-          <td><%= link_to "View Book's Detail", book_url(book) %></td>
+          <td><%= link_to "View Book's Details", book_url(book), class: "btn btn-info" %></td>
           <% if current_user.admin? %>
               <td><%= link_to raw('<span class="glyphicon glyphicon-trash"></span> Delete Book'), book_path(book), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger' %></td>
           <% end %>
