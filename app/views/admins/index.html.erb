@@ -1,28 +1,30 @@
 <h2>List of Admin</h2>
 
-<table class="table table-hover">
-  <thead>
-  <tr>
-    <th>Email</th>
-    <th>Name</th>
-    <th></th>
-    <th></th>
-  </tr>
-  </thead>
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th>Email</th>
+      <th>Name</th>
+      <th></th>
+      <th></th>
+    </tr>
+    </thead>
 
-  <tbody>
-  <% @admins.each do |admin| %>
+    <tbody>
+    <% @admins.each do |admin| %>
 
-      <tr>
-        <td><%= admin.email %></td>
-        <td><%= admin.name %></td>
-        <td><%= link_to "View Admin's Details", admin_path(admin) %></td>
-        <td><%= unless current_user == admin || admin.email == 'admin@ncsu.edu'
-                  link_to raw('<span class="glyphicon glyphicon-trash"></span> Delete Book'), admin_path(admin), method: :delete, data: {confirm: 'Are you sure?'}, class: "btn btn-danger"
-                end %></td>
-      </tr>
-  <% end %>
-  </tbody>
-</table>
+        <tr>
+          <td><%= admin.email %></td>
+          <td><%= admin.name %></td>
+          <td><%= link_to "View Admin's Details", admin_path(admin) %></td>
+          <td><%= unless current_user == admin || admin.email == 'admin@ncsu.edu'
+                    link_to raw('<span class="glyphicon glyphicon-trash"></span> Delete Book'), admin_path(admin), method: :delete, data: {confirm: 'Are you sure?'}, class: "btn btn-danger"
+                  end %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
 
 <%= link_to "Create New Admin", action: :new %>

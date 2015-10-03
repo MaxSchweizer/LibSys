@@ -1,78 +1,83 @@
 <h2>Book Details</h2>
 
 <% if current_user.admin? %>
-    <%= link_to raw('<span class="glyphicon glyphicon-pencil"></span> Edit Details'), action: :edit, class: "btn btn-default" %><br>
+    <%= link_to raw('<span class="glyphicon glyphicon-pencil"></span> Edit Details'), action: :edit, class: "btn btn-default" %>
+    <br>
 <% end %>
 
-<table class="table table-hover">
-  <thead>
-  <tr>
-    <th>ISBN</th>
-    <th>Title</th>
-    <th>Description</th>
-    <th>Authors</th>
-    <th>Status</th>
-    <% if current_user.admin? %>
-        <th>Checked Out To</th>
-    <% end %>
-    <% if current_user.library_member? %>
-        <th></th>
-    <% end %>
-  </tr>
-  </thead>
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th>ISBN</th>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Authors</th>
+      <th>Status</th>
+      <% if current_user.admin? %>
+          <th>Checked Out To</th>
+      <% end %>
+      <% if current_user.library_member? %>
+          <th></th>
+      <% end %>
+    </tr>
+    </thead>
 
-  <tbody>
-  <tr>
-    <td><%= @book.isbn %></td>
-    <td><%= @book.title %></td>
-    <td><%= @book.description %></td>
-    <td><%= @book.authors %></td>
-    <td><%= @book.checked_out? ? "Checked Out" : "Available" %></td>
-    <% if current_user.admin? %>
-        <td><%= @book.checked_out_to?.nil? ? "Not Checked Out" : (link_to "#{@book.checked_out_to?.email}", library_member_path(@book.checked_out_to?), action: :show) %></td>
-    <% end %>
+    <tbody>
+    <tr>
+      <td><%= @book.isbn %></td>
+      <td><%= @book.title %></td>
+      <td><%= @book.description %></td>
+      <td><%= @book.authors %></td>
+      <td><%= @book.checked_out? ? "Checked Out" : "Available" %></td>
+      <% if current_user.admin? %>
+          <td><%= @book.checked_out_to?.nil? ? "Not Checked Out" : (link_to "#{@book.checked_out_to?.email}", library_member_path(@book.checked_out_to?), action: :show) %></td>
+      <% end %>
 
 
-    <% if current_user.library_member? %>
-        <td>
-          <% if @book.checked_out? %>
-              <% if @book.checked_out_to? == current_user %>
-                  <%= button_to "Return Book", action: :update, controller: :histories, id: @book.last_checked_out %>
-              <% else %>
-                  Book Checked Out To Other User
-              <% end %>
-          <% elsif !@book.checked_out? %>
-              <%= button_to "Checkout Book", action: :create, controller: :histories, data: @book %>
-          <% end %>
-        </td>
-    <% end %>
-  </tr>
-  </tbody>
-</table>
+      <% if current_user.library_member? %>
+          <td>
+            <% if @book.checked_out? %>
+                <% if @book.checked_out_to? == current_user %>
+                    <%= button_to "Return Book", action: :update, controller: :histories, id: @book.last_checked_out %>
+                <% else %>
+                    Book Checked Out To Other User
+                <% end %>
+            <% elsif !@book.checked_out? %>
+                <%= button_to "Checkout Book", action: :create, controller: :histories, data: @book %>
+            <% end %>
+          </td>
+      <% end %>
+    </tr>
+    </tbody>
+  </table>
+</div>
 
 <h2>Book Checkout History</h2>
 
-<table class="table table-hover">
-  <thead>
-  <tr>
-    <th>Email</th>
-    <th>Name</th>
-    <th>Status</th>
-    <th>Checkout Date</th>
-    <th>Return Date</th>
-  </tr>
-  </thead>
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th>Email</th>
+      <th>Name</th>
+      <th>Status</th>
+      <th>Checkout Date</th>
+      <th>Return Date</th>
+    </tr>
+    </thead>
 
-  <tbody>
-  <% history = current_user.admin? ? @book.histories : @book.my_history(current_user)
-     history.each do |history| %>
-      <tr>
-        <td><%= link_to "#{history.library_member.email}", library_member_path(history.library_member), action: :show %></td>
-        <td><%= history.library_member.name %></td>
-        <td><%= history.checked_out? ? "Checked Out" : "Available" %></td>
-        <td><%= history.checkout %></td>
-        <td><%= history.return %></td>
-      </tr>
-  <% end %>
-  </tbody>
-</table>
+    <tbody>
+    <% history = current_user.admin? ? @book.histories : @book.my_history(current_user)
+       history.each do |history| %>
+        <tr>
+          <td><%= link_to "#{history.library_member.email}", library_member_path(history.library_member), action: :show %></td>
+          <td><%= history.library_member.name %></td>
+          <td><%= history.checked_out? ? "Checked Out" : "Available" %></td>
+          <td><%= history.checkout %></td>
+          <td><%= history.return %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
