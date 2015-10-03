@@ -6,22 +6,29 @@
           <%= form_tag "/books", method: "get", class: "form-inline" do %>
 
               <div class="form-group">
-                <%= label_tag :query, "Search books for:", class: "control-label" %>
+                <%= label_tag :query, "Search Books For:", class: "control-label" %>
                 <%= text_field_tag :query, "", class: "form-control" %>
               </div>
 
               <div class="form-group">
-                <%= radio_button_tag :search_type, "isbn", :checked => true %>
-                <%= label_tag :search_type_isbn, "Isbn" %>
-                <% ["title", "authors", "description"].each do |item| %>
-                    <%= radio_button_tag :search_type, item %>
-                    <%= label_tag :search_type_isbn, item.capitalize %>
-                <% end %>
+                <%= label_tag :query_by, "Search By:", class: "control-label" %>
+                <div class="btn-group" data-toggle="buttons">
+                  <label class="btn btn-default active">
+                    <%= radio_button_tag :search_type, "isbn", :checked => true %>
+                    <%= label_tag :search_type_isbn, "Isbn" %>
+                  </label>
+                  <% ["title", "authors", "description"].each do |item| %>
+                      <label class="btn btn-default">
+                        <%= radio_button_tag :search_type, item %>
+                        <%= label_tag :search_type_isbn, item.capitalize %>
+                      </label>
+                  <% end %>
+                </div>
                 <%= submit_tag "Search", class: 'btn btn-default' %>
               </div>
 
               <div class="form-group">
-                <%= label_tag :status, "Show Books With Status:" %>
+                <%= label_tag :status, "Show Books With Status:", class: "control-label input-group" %>
                 <%= link_to 'Checked Out', '/books?utf8=✓&query=true&search_type=status', class: 'btn btn-default' %>
                 <%= link_to 'Available', '/books?utf8=✓&query=false&search_type=status', class: 'btn btn-default' %>
               </div>
