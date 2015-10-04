@@ -53,7 +53,10 @@
   </table>
 </div>
 
+<% history = current_user.admin? ? @book.histories : @book.my_history(current_user) %>
+
 <h2>Book Checkout History</h2>
+<h4><%= history.size %> History Records Found</h4>
 
 <div class="table-responsive">
   <table class="table table-hover">
@@ -68,8 +71,7 @@
     </thead>
 
     <tbody>
-    <% history = current_user.admin? ? @book.histories : @book.my_history(current_user)
-       history.each do |history| %>
+    <% history.each do |history| %>
         <tr>
           <td><%= link_to "#{history.library_member.email}", library_member_path(history.library_member), action: :show %></td>
           <td><%= history.library_member.name %></td>
