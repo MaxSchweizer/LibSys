@@ -14,22 +14,36 @@
     </div>
 <% end %>
 
-<%= form_tag book_path(@book), :method => :put do %>
+<%= form_tag book_path(@book), :method => :put, :class => "form" do %>
     <% ['isbn', 'title', 'authors', 'description'].each do |item| %>
-        <%= label_tag("book[#{item}]", item.capitalize) %><br>
-        <%= text_field_tag("book[#{item}]", @book.send(item)) %><br>
+        <div class="form-group">
+          <%= label_tag "book[#{item}]", item.capitalize, class: "control-label" %>
+          <%= text_field_tag "book[#{item}]", @book.send(item), class: "form-control" %>
+        </div>
     <% end %>
-    <% if @book.checked_out? %>
-        <%= radio_button_tag(:status, "false") %>
-        <%= label_tag(:status_checked_in, "Available") %>
-        <%= radio_button_tag(:status, "true", :checked => true) %>
-        <%= label_tag(:status_checked_out, "Checked Out") %><br>
-    <% else %>
-        <%= radio_button_tag(:status, "false", :checked => true) %>
-        <%= label_tag(:status_checked_in, "Available") %>
-        <%= radio_button_tag(:status, "true") %>
-        <%= label_tag(:status_checked_out, "Checked Out") %><br>
-    <% end %>
+    <div class="form-group">
+      <div class="btn-group btn-group-justified" data-toggle="buttons">
+        <% if @book.checked_out? %>
+            <label class="btn btn-default">
+              <%= radio_button_tag(:status, "false") %>
+              <%= label_tag(:status_checked_in, "Available") %>
+            </label>
+            <label class="btn btn-default active">
+              <%= radio_button_tag(:status, "true", :checked => true) %>
+              <%= label_tag(:status_checked_out, "Checked Out") %>
+            </label>
+        <% else %>
+            <label class="btn btn-default active">
+              <%= radio_button_tag(:status, "false", :checked => true) %>
+              <%= label_tag(:status_checked_in, "Available") %>
+            </label>
+            <label class="btn btn-default">
+              <%= radio_button_tag(:status, "true") %>
+              <%= label_tag(:status_checked_out, "Checked Out") %>
+            </label>
+        <% end %>
+      </div>
+    </div>
     NOTE: If you are entering a 'Available' book then selecting a library member below will not do anything.<br>
 
     Book Status:
