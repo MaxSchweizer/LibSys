@@ -1,5 +1,9 @@
 <h2>Library Member Details</h2>
 
+<%= if current_user == @library_member
+      link_to raw('<span class="glyphicon glyphicon-pencil"></span> Edit Details'), action: :edit
+    end %>
+
 <div class="table-responsive">
   <table class="table table-hover">
     <thead>
@@ -18,11 +22,8 @@
   </table>
 </div>
 
-<%= if current_user == @library_member
-      link_to "Edit Profile Details", action: :edit
-    end %>
-
-<h2>Checkout history</h2>
+<h2>Library Member Checkout History</h2>
+<h4><%= @library_member.histories.size %> History Records Found</h4>
 
 <div class="table-responsive">
   <table class="table table-hover">
@@ -52,7 +53,17 @@
   </table>
 </div>
 
+<% checkedOutBookCount = 0
+   @library_member.histories.each do |history|
+     if history.return.nil?
+       checkedOutBookCount += 1
+     end
+   end %>
+
+
 <h2>Currently Checkout Books</h2>
+<h4><%= checkedOutBookCount %> Currently Checked Out Books</h4>
+
 
 <div class="table-responsive">
   <table class="table table-hover">

@@ -1,5 +1,9 @@
 <h2>Admin Details</h2>
 
+<%= if current_user == @admin
+      link_to raw('<span class="glyphicon glyphicon-pencil"></span> Edit Details'), action: :edit
+    end %>
+
 <div class="table-responsive">
   <table class="table table-hover">
     <thead>
@@ -17,7 +21,3 @@
     </tbody>
   </table>
 </div>
-
-<%= if current_user == @admin
-      link_to "Edit Profile Details", action: :edit
-    end %>
