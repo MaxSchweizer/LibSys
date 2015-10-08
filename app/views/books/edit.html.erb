@@ -23,34 +23,43 @@
     <% end %>
     <div class="form-group">
       <div class="btn-group btn-group-justified" data-toggle="buttons">
-        <% if @book.checked_out? %>
-            <label class="btn btn-default">
-              <%= radio_button_tag(:status, "false") %>
-              <%= label_tag(:status_checked_in, "Available") %>
-            </label>
-            <label class="btn btn-default active">
-              <%= radio_button_tag(:status, "true", :checked => true) %>
-              <%= label_tag(:status_checked_out, "Checked Out") %>
-            </label>
-        <% else %>
+        <% if @library_members.size == 0 %>
             <label class="btn btn-default active">
               <%= radio_button_tag(:status, "false", :checked => true) %>
               <%= label_tag(:status_checked_in, "Available") %>
             </label>
-            <label class="btn btn-default">
-              <%= radio_button_tag(:status, "true") %>
-              <%= label_tag(:status_checked_out, "Checked Out") %>
-            </label>
+        <% else %>
+            <% if @book.checked_out? %>
+                <label class="btn btn-default">
+                  <%= radio_button_tag(:status, "false") %>
+                  <%= label_tag(:status_checked_in, "Available") %>
+                </label>
+                <label class="btn btn-default active">
+                  <%= radio_button_tag(:status, "true", :checked => true) %>
+                  <%= label_tag(:status_checked_out, "Checked Out") %>
+                </label>
+            <% else %>
+                <label class="btn btn-default active">
+                  <%= radio_button_tag(:status, "false", :checked => true) %>
+                  <%= label_tag(:status_checked_in, "Available") %>
+                </label>
+                <label class="btn btn-default">
+                  <%= radio_button_tag(:status, "true") %>
+                  <%= label_tag(:status_checked_out, "Checked Out") %>
+                </label>
+            <% end %>
         <% end %>
       </div>
     </div>
-    NOTE: If you are entering a 'Available' book then selecting a library member below will not do anything.<br>
 
-    Book Status:
-    <%= select_tag(:library_member, options_for_select(@library_members, @library_members.length)) %>
-    <%= label_tag(:library_member, "Checked Out To This Library Member") %><br>
+    <% unless @library_members.size == 0 %>
+        <div class="form-group">
+          <%= label_tag :library_member, "Library Member to Checkout Book if 'Checked Out' Selected" %>
+          <%= select_tag :library_member, options_for_select(@library_members, @library_members.length), class: 'form-control' %>
+        </div>
+    <% end %>
 
-    <%= submit_tag("Submit") %>
+    <%= submit_tag "Submit", class: 'btn btn-default btn-block' %>
 <% end %>
 
 
