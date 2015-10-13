@@ -15,3 +15,6 @@ User type: Admin
 
 ### Testing
 As per the project requirements, we have throughly tested both a model and a controller from our project.  Please see our [books_controller_test.rb](test/controllers/books_controller_test.rb) and our [book_test.rb](test/models/book_test.rb) tests.
+
+### Changing Book Status as Admin
+If you are logged in as an Admin you are able to check out and return books by editing a books details.  To do this, please first view the details of the book you wish to change the status of.  Click the link at the top of 'Book Details' page called 'Edit Details'.  You will be able to modify the status of the book from this page. 
