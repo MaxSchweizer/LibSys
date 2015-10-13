@@ -15,10 +15,18 @@ class AdminsController < ApplicationController
     @admin = Admin.find params[:id]
 
     if @admin == current_user
-      if @admin.update admin_params
-        redirect_to @admin
+      if @admin.email == 'admin@ncsu.edu'
+        if @admin.update default_admin_params
+          redirect_to @admin
+        else
+          render :edit
+        end
       else
-        render :edit
+        if @admin.update admin_params
+          redirect_to @admin
+        else
+          render :edit
+        end
       end
     end
   end
@@ -47,11 +55,11 @@ class AdminsController < ApplicationController
 
   private
   def admin_params
-    if current_user.admin? && current_user.email == 'admin@ncsu.edu'
-      params.require(:admin).permit(:email, :name)
-    else
-      params.require(:admin).permit(:email, :name, :password, :password_confirmation)
-    end
+    params.require(:admin).permit(:email, :name, :password, :password_confirmation)
+  end
+
+  def default_admin_params
+    params.require(:admin).permit(:email, :name)
   end
 
 end
