@@ -17,4 +17,10 @@ User type: Admin
 As per the project requirements, we have throughly tested both a model and a controller from our project.  Please see our [books_controller_test.rb](test/controllers/books_controller_test.rb) and our [book_test.rb](test/models/book_test.rb) tests.
 
 ### Changing Book Status as Admin
-If you are logged in as an Admin you are able to check out and return books by editing a books details.  To do this, please first view the details of the book you wish to change the status of.  Click the link at the top of 'Book Details' page called 'Edit Details'.  You will be able to modify the status of the book from this page. 
+If you are logged in as an Admin you are able to check out and return books by editing a books details.  To do this, please first view the details of the book you wish to change the status of.  Click the link at the top of 'Book Details' page called 'Edit Details'.  You will be able to modify the status of the book from this page.
+ 
+### Deleting Checked Out Book
+Our system allows Admins to delete books that are checked out.  The checked out book will be removed from the system.  Any book histories related to this book will also be removed from the system.  Any Library Member who had the book checked out will no longer have a record of the book in their history.
+ 
+### Deleting Library Member with Checked Out Books
+Our system allows Admins to delete Library Members that have checked out books.  The Library Member will be removed from the system.  Any book histories related to this Library Member will also be removed from the system.  Any books which the Library Member had checked out will no longer have a record of the Library Member in their history.
