@@ -1,17 +1,20 @@
 # LibSys
-CSC 517 Ruby on Rails LibSys Project
+LibSys is a simple library inventory management application written with a combination of Ruby on Rails and Bootstrap.  This application was written as a project for NCSU's CSC 517 class.
 
-LibSys is a simple library inventory management application written with Ruby On Rails.
+### Default Admin Credentials
+As per the project requirements, we have hard coded a Admin user.  Please use the following details to access the hard coded Admin user:
+
+Email: admin@ncsu.edu
+Password: 2015_N0rthCar0l1na
+User type: Admin
+
+### User Types
+LibSys has two separate user types: Admin and Library Member.  Both user types share some common behavior and attributes.  In LibSys, the primary identification for a user is their email address.  Since Admin and Library Member are separate user types, it is possible to have an Admin and a Library Member who use the same email to login.  Because of this, a user has to choose which kind of account they are using on the login page.
 
 ### Checkout History
 Our implementation follows a hard-delete for a Library Member's history when an Admin removes a book from the system.  When a book is removed, a Library Member will no longer see any records related to the book in their checkout history.
 
 Our implementation follows a hard-delete for a Book's history when an Admin removes a Library Member from the system.  When a Library Member is removed, a book will no longer see any records related to the library member in their checkout history.  If the Library Member who is removed has any checked out books, these books will become available again.
-
-### Default Admin Credentials
-Email: admin@ncsu.edu
-Password: 2015_N0rthCar0l1na
-User type: Admin
 
 ### Testing
 As per the project requirements, we have throughly tested both a model and a controller from our project.  Please see our [books_controller_test.rb](test/controllers/books_controller_test.rb) and our [book_test.rb](test/models/book_test.rb) tests.
