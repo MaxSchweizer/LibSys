@@ -26,16 +26,19 @@
       <%= f.text_field :name %>
     </p>
 
-    <p>
-      Password:<br>
-      <%= f.password_field :password %>
-    </p>
+    <% unless @admin.email == 'admin@ncsu.edu' %>
+        <p>
+          Password:<br>
+          <%= f.password_field :password %>
+        </p>
 
-    <p>
-      Repeat Password:<br>
-      <%= f.password_field :password_confirmation %>
-    </p>
-
+        <p>
+          Repeat Password:<br>
+          <%= f.password_field :password_confirmation %>
+        </p>
+    <% else %>
+        <p>The default admin cannot have their password changed.</p>
+    <% end %>
     <p>
       <%= f.submit "Submit" %>
     </p>

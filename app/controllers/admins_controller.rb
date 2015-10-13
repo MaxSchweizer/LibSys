@@ -47,6 +47,11 @@ class AdminsController < ApplicationController
 
   private
   def admin_params
-    params.require(:admin).permit(:email, :name, :password, :password_confirmation)
+    if current_user.admin? && current_user.email == 'admin@ncsu.edu'
+      params.require(:admin).permit(:email, :name)
+    else
+      params.require(:admin).permit(:email, :name, :password, :password_confirmation)
+    end
   end
+
 end
